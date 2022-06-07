@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<DataAccess.Models.Article>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "_Layout";
+    var tmp = Model;
 }
 
 <h1>Index</h1>
@@ -16,7 +16,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ArticleName)
             </th>
-            <th>
+            <th>                
                 @Html.DisplayNameFor(model => model.ArticleAmount)
             </th>
             <th>
@@ -26,6 +26,7 @@
         </tr>
     </thead>
     <tbody>
+
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -35,12 +36,17 @@
                 @Html.DisplayFor(modelItem => item.ArticleAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price.PriceId)
+                @Html.DisplayFor(modelItem => item.Price.PriceValue)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ArticleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ArticleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ArticleId">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Details" asp-route-id="@item.ArticleId">Details</a> 
+                    <a asp-action="Edit" asp-route-id="@item.ArticleId">Edit</a>                    
+                    <a asp-action="Delete" asp-route-id="@item.ArticleId">Delete</a>                    
+                }                
+                <a asp-action="Buy" asp-route-id="@item.ArticleId">Buy</a> |
+                <a asp-action="Details" asp-route-id="@item.ArticleId">Details</a>
             </td>
         </tr>
 }

@@ -1,4 +1,5 @@
 using DataAccess.Models;
+using Feuerwehrbezahlsystem;
 using Feuerwehrbezahlsystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<PaymentsystemContext>();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+await Seed.EnsureSeedData();
 
 var app = builder.Build();
 

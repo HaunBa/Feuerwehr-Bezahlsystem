@@ -21,8 +21,10 @@ namespace Feuerwehrbezahlsystem.Controllers
         // GET: Article
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = "Artikel";
             var paymentsystemContext = _context.Articles.Include(a => a.Price);
-            return View(await paymentsystemContext.ToListAsync());
+            var model = await paymentsystemContext.ToListAsync();
+            return View(model);
         }
 
         // GET: Article/Details/5
@@ -58,6 +60,7 @@ namespace Feuerwehrbezahlsystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ArticleId,ArticleName,ArticleAmount,PriceId")] Article article)
         {
+            article.Price = _context.Prices.FirstOrDefault(x => x.PriceId == article.PriceId);
             if (ModelState.IsValid)
             {
                 _context.Add(article);
