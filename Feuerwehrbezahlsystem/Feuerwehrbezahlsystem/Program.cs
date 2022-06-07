@@ -8,17 +8,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddTransient<UserManager<IdentityUser>>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>();
+
+builder.Services.AddTransient<IRoleStore<IdentityRole>>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDbContext<PaymentsystemContext>();
+builder.Services.AddDbContext<PaymentsystemContext>(options => 
+    options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireNonAlphanumeric = false;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
-
-await Seed.EnsureSeedData();
 
 var app = builder.Build();
 
