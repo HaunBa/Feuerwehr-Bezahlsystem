@@ -5,11 +5,11 @@
 }
 
 <h1>Role Manager</h1>
-<form method="post" asp-action="AddRole" asp-controller="RoleManager">
+<form method="post" asp-action="AddRole">
     <div class="input-group">
         <input type="text" name="roleName" class="form-control w-25">
         <span class="input-group-btn">
-            <input type="submit" name="Add New Role" class="btn btn-info" />
+            <input type="submit" name="submit" class="btn btn-info"/>
         </span>
     </div>
 </form>
@@ -20,6 +20,7 @@
 
             <th>Id</th>
             <th>Role</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -28,8 +29,9 @@
             <tr>
                 <td>@role.Id</td>
                 <td>@role.Name</td>
+                <td><div class="col col-6" data-label="Options"><a asp-action="DeleteRole" asp-route-Id="@role.Id">Delete</a> |
+                <a asp-action="Edit" asp-route-id="@role.Id">Edit</a></div></td>
             </tr>
         }
-
     </tbody>
 </table>
