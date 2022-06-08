@@ -76,8 +76,8 @@ namespace TestingApp.Controllers
                 if (frole.Name != role.Name)
                 {
                     frole.Name = role.Name;
-                    
-                    var res = await _roleManager.UpdateAsync(role);
+                    frole.NormalizedName = frole.Name.ToUpper();
+                    var res = await _roleManager.UpdateAsync(frole);
                 }
                 
                 return RedirectToAction(nameof(Index));
