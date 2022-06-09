@@ -8,7 +8,9 @@
     var drinks = Model.Where(x => x.Type == "Drink").ToList();
 }
 
-<h1>All Products</h1>
+<div class="container">
+    <div class="col-sm-10">
+        <h1>All Products</h1>
 <br />
 <h2>Drinks</h2>
 <hr />
@@ -18,88 +20,95 @@
 }else{
     <div class="container">
         @for (int i = 0; i < drinks.Count; i+=3)
-    {
-        <div class="row gy-5" style="margin-top: 20px">
-            @for (int x = i; x < i+3 && x < drinks.Count; x++)
-            {
-                <div class="col">
-                    <a href="https://www.google.com" style="color: black; text-decoration:none">
-                        <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
-                          <div class="card-body">
-                            <h5 class="card-title">@drinks[x].Name</h5>
-                                <p class="card-text">
-                                    <div>
-                                        <strong>Price:</strong> @drinks[x].PriceAmount €
-                                    </div>
-                                    <div>
-                                        <strong>Amount Left:</strong> @drinks[x].Amount
-                                    </div>
-                                </p>
-                          </div>
-                    </div>
-                    </a>
-                </div>
-                @if (drinks.Last().Equals(drinks[x]))
+        {
+            <div class="row gy-5" style="margin-top: 20px">
+                @for (int x = i; x < i+3 && x < drinks.Count; x++)
                 {
                     <div class="col">
-                        <!-- Empty Col for displaying the cards fittingly-->
+                        <a href="https://www.google.com" style="color: black; text-decoration:none">
+                            <div class="card" style="width: 18rem;">
+                          <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
+                              <div class="card-body">
+                                <h5 class="card-title">@drinks[x].Name</h5>
+                                    <p class="card-text">
+                                        <div>
+                                            <strong>Price:</strong> @drinks[x].PriceAmount €
+                                        </div>
+                                        <div>
+                                            <strong>Amount Left:</strong> @drinks[x].Amount
+                                        </div>
+                                    </p>
+                              </div>
+                        </div>
+                        </a>
                     </div>
+                    @if (drinks.Last().Equals(drinks[x]))
+                    {
+                        <div class="col">
+                            <!-- Empty Col for displaying the cards fittingly-->
+                        </div>
+                    }
                 }
-            }
+            </div>
+        } 
         </div>
-    } 
-    </div>
-}
-<br />
-<h2>Food</h2>
-<hr />
-@if (!Model.Any(x => x.Type == "Food"))
-{
-    <h3>Nothing left...</h3>    
-}else
-{
-    @foreach(var item in Model.Where(x => x.Type == "Food")){
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-          <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">
-                <div>
-                    <strong>Price:</strong> @item.PriceAmount €
-                </div>
-                <div>
-                    <strong>Amount Left:</strong> @item.Amount
-                </div>
-            </p>
-          </div>
-        </div>
-    }        
-}
-<br />
-<h2>Else</h2>
-<hr />
+    }
+    <br />
+    <h2>Food</h2>
+    <hr />
+    @if (!Model.Any(x => x.Type == "Food"))
+    {
+        <h3>Nothing left...</h3>    
+    }else
+    {
+        @foreach(var item in Model.Where(x => x.Type == "Food")){
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
+              <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">
+                    <div>
+                        <strong>Price:</strong> @item.PriceAmount €
+                    </div>
+                    <div>
+                        <strong>Amount Left:</strong> @item.Amount
+                    </div>
+                </p>
+              </div>
+            </div>
+        }        
+    }
+    <br />
+    <h2>Else</h2>
+    <hr />
 
-@if (!Model.Any(x => x.Type == "Else"))
-{
-    <h3>Nothing left...</h3>    
-}else
-{
-    @foreach(var item in Model.Where(x => x.Type == "Else")){
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-          <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">
-                <div>
-                    <strong>Price:</strong> @item.PriceAmount €
-                </div>
-                <div>
-                    <strong>Amount Left:</strong> @item.Amount
-                </div>
-            </p>
-          </div>
+    @if (!Model.Any(x => x.Type == "Else"))
+    {
+        <h3>Nothing left...</h3>    
+    }else
+    {
+        @foreach(var item in Model.Where(x => x.Type == "Else")){
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
+              <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">
+                    <div>
+                        <strong>Price:</strong> @item.PriceAmount €
+                    </div>
+                    <div>
+                        <strong>Amount Left:</strong> @item.Amount
+                    </div>
+                </p>
+              </div>
+            </div>
+        }        
+    }
+    </div>
+    <div class="col-sm-1">
+        <div class="container">
+
         </div>
-    }        
-}
+    </div>
+</div>
 
