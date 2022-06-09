@@ -1,0 +1,35 @@
+﻿@using TestingApp.ViewModels
+@model IEnumerable<ArticleWithPriceVM>
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>All Articles</h1>
+<a asp-action="Create">Create New</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Price Since</th>
+            <th>Price Until</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var art in Model)
+        {
+        <tr>
+            <td>@art.Name</td>
+            <td>@art.PriceAmount €</td>
+            <td>@art.Amount</td>
+            <td>@art.Since</td>
+            <td>@art.Until</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">Edit Article</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

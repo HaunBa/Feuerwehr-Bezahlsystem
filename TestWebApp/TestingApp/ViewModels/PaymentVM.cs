@@ -1,6 +1,6 @@
-﻿namespace TestingApp.Models
+﻿namespace TestingApp.ViewModels
 {
-    public class Payment
+    public class PaymentVM
     {
         public int PaymentId { get; set; }
         public string PersonId { get; set; }

@@ -49,6 +49,24 @@ namespace TestingApp.Data
             {
                 entity.ToTable("UserTokens");
             });
+
+            builder.Entity<TopUp>()
+                .HasOne(t => t.Person)
+                .WithMany(p => p.TopUps)
+                .HasForeignKey(p => p.PersonId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<TopUp>()
+                .HasOne(t => t.Executor);
+
+            builder.Entity<Payment>()
+                .HasOne(t => t.Person)
+                .WithMany(p => p.Payments)
+                .HasForeignKey(p => p.PersonId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Payment>()
+                .HasOne(t => t.Executor);
         }
     }
 }

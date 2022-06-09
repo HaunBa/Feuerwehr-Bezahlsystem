@@ -28,10 +28,13 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager">Role Manager</a>
+                                <a class="nav-link text-dark" href="~/RoleManager">Role Manager</a>
                             </li>
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="UserRoles">Users</a>
+                                <a class="nav-link text-dark" href="~/UserRoles">Users</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" href="~/Article">Articles</a>
                             </li>
                         }
                     </ul>

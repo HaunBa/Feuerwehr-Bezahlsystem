@@ -12,8 +12,8 @@ using TestingApp.Data;
 namespace TestingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220607125133_Added Image for Article")]
-    partial class AddedImageforArticle
+    [Migration("20220609101112_AddedExecutor")]
+    partial class AddedExecutor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,12 +176,10 @@ namespace TestingApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -218,12 +216,10 @@ namespace TestingApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -258,6 +254,10 @@ namespace TestingApp.Migrations
                     b.Property<int>("PriceId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PaymentId");
@@ -285,16 +285,19 @@ namespace TestingApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExecutorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PersonId1")
+                    b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("PersonId1");
+                    b.HasIndex("ExecutorId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Payments", "Identity");
                 });
@@ -310,10 +313,10 @@ namespace TestingApp.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("From")
+                    b.Property<DateTime>("Since")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Since")
+                    b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PriceId");
@@ -339,16 +342,19 @@ namespace TestingApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExecutorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PersonId1")
+                    b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TopUpId");
 
-                    b.HasIndex("PersonId1");
+                    b.HasIndex("ExecutorId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("TopUps", "Identity");
                 });
@@ -361,6 +367,14 @@ namespace TestingApp.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -441,22 +455,38 @@ namespace TestingApp.Migrations
 
             modelBuilder.Entity("TestingApp.Models.Payment", b =>
                 {
-                    b.HasOne("TestingApp.Models.ApplicationUser", "Person")
-                        .WithMany("Payments")
-                        .HasForeignKey("PersonId1")
+                    b.HasOne("TestingApp.Models.ApplicationUser", "Executor")
+                        .WithMany()
+                        .HasForeignKey("ExecutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TestingApp.Models.ApplicationUser", "Person")
+                        .WithMany("Payments")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Executor");
 
                     b.Navigation("Person");
                 });
 
             modelBuilder.Entity("TestingApp.Models.TopUp", b =>
                 {
-                    b.HasOne("TestingApp.Models.ApplicationUser", "Person")
-                        .WithMany("TopUps")
-                        .HasForeignKey("PersonId1")
+                    b.HasOne("TestingApp.Models.ApplicationUser", "Executor")
+                        .WithMany()
+                        .HasForeignKey("ExecutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TestingApp.Models.ApplicationUser", "Person")
+                        .WithMany("TopUps")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Executor");
 
                     b.Navigation("Person");
                 });

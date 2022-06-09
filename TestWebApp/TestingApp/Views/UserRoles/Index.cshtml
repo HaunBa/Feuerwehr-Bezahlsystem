@@ -5,6 +5,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 <h1>All Users</h1>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -30,7 +31,8 @@
             <td>@user.OpenCheckoutValue</td>
             <td>@user.Role</td>
             <td>
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.Id">Edit User</a>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.Id">Edit User</a> |
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Details" asp-route-userId="@user.Id">Details</a>
             </td>
         </tr>
         }

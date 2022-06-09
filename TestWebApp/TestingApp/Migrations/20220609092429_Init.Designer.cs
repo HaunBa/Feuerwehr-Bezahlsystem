@@ -12,8 +12,8 @@ using TestingApp.Data;
 namespace TestingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220607124720_Added DbSets for Paymentsystem")]
-    partial class AddedDbSetsforPaymentsystem
+    [Migration("20220609092429_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,12 +176,10 @@ namespace TestingApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -218,12 +216,10 @@ namespace TestingApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -244,6 +240,10 @@ namespace TestingApp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -253,6 +253,10 @@ namespace TestingApp.Migrations
 
                     b.Property<int>("PriceId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -281,16 +285,13 @@ namespace TestingApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PersonId1")
+                    b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("PersonId1");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Payments", "Identity");
                 });
@@ -306,10 +307,10 @@ namespace TestingApp.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("From")
+                    b.Property<DateTime>("Since")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Since")
+                    b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PriceId");
@@ -335,16 +336,13 @@ namespace TestingApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PersonId1")
+                    b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TopUpId");
 
-                    b.HasIndex("PersonId1");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("TopUps", "Identity");
                 });
@@ -357,6 +355,14 @@ namespace TestingApp.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -439,7 +445,7 @@ namespace TestingApp.Migrations
                 {
                     b.HasOne("TestingApp.Models.ApplicationUser", "Person")
                         .WithMany("Payments")
-                        .HasForeignKey("PersonId1")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -450,7 +456,7 @@ namespace TestingApp.Migrations
                 {
                     b.HasOne("TestingApp.Models.ApplicationUser", "Person")
                         .WithMany("TopUps")
-                        .HasForeignKey("PersonId1")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

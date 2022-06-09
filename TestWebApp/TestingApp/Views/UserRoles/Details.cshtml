@@ -1,0 +1,145 @@
+﻿@using ViewModels
+@model UserWithAllInfosVM
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@(Model.FirstName + " " + Model.LastName) </h1>
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        User Infos
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+          <dl class="row">
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.FirstName)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.FirstName)
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.LastName)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.LastName)
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.Balance)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.Balance) €
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.Comment)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.Comment)
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.OpenCheckoutDate)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.OpenCheckoutDate)
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.OpenCheckoutValue)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.OpenCheckoutValue)
+              </dd>
+              <dt class="col-sm-2">
+                  @Html.DisplayNameFor(model => model.Role)
+              </dt>
+              <dd class="col-sm-10">
+                  @Html.DisplayFor(model => model.Role)
+              </dd>
+          </dl>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Payments
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+          <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Payment Id</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Cash Amount</th>
+            <th>Article Count</th>
+            <th>Executor Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model.Payments)
+        {
+        <tr>
+            <td>@payment.PaymentId</td>
+            <td>@payment.Date</td>
+            <td>@payment.Description</td>
+            <td>@payment.CashAmount</td>
+            <td>@payment.Articles.Count</td>
+            <td>@payment.Executor.UserName</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        TopUps
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+      <div class="accordion-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Payment Id</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Cash Amount</th>
+                        <th>Executor Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var topup in Model.TopUps)
+                    {
+                    <tr>
+                        <td>@topup.TopUpId</td>
+                        <td>@topup.Date</td>
+                        <td>@topup.Description</td>
+                        <td>@topup.CashAmount</td>
+                        <td>@topup.Executor.UserName</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Details" asp-route-topupId="@topup.TopUpId">Details</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-warning" href="~/UserRoles">Go Back</a>

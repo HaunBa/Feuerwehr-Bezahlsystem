@@ -17,7 +17,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
         .AddDefaultTokenProviders();
 
 builder.Services.AddRazorPages();
-
+builder.Services.AddSession();
 
 var app = builder.Build();
 
