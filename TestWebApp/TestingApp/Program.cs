@@ -54,6 +54,8 @@ else
 
 app.MapDefaultControllerRoute();
 
+app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

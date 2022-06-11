@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestingApp.Data;
+using TestingApp.Helpers;
 using TestingApp.ViewModels;
 
 namespace TestingApp.Controllers
@@ -29,6 +30,11 @@ namespace TestingApp.Controllers
                                                 Until = article.Price.Until,
                                                 Type = article.Type
                                             }).ToListAsync();
+
+            var cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
+            ViewBag.cart = cart;
+            if (cart == null) ViewBag.total = 0;
+            else ViewBag.total = cart.Sum(item => item.PriceAmount * item.Amount);
 
             return View(articles);
         }
