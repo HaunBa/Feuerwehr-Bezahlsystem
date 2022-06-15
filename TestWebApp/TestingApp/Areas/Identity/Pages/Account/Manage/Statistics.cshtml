@@ -8,11 +8,12 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            Chart 1
+            <h3>Drink</h3>
             <canvas id="chart1" width="400" height="400"></canvas>
         </div>
         <div class="col">
-            Chart 2
+            <h3>Article Percentage</h3>
+            <canvas id="donutChart" width="400" height="400"></canvas>
         </div>
     </div>
     <div class="row">
@@ -26,11 +27,15 @@
 </div>
 
 @section scripts{
-    <script src="~/js/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         var ctx = document.getElementById('chart1');
         var chart1 = new Chart(ctx, @Html.Raw(Model.ChartJson));
+
+        var ctx = document.getElementById('donutChart');
+        var donutChart = new Chart(ctx, @Html.Raw(Model.DonutChartJson));
     });
 </script>
 }
