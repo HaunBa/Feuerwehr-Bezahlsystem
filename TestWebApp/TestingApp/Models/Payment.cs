@@ -8,8 +8,8 @@
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public double CashAmount { get; set; }
-        public virtual List<Article> Articles { get; set; } = new List<Article>();
-        public string ExecutorId { get; set; }
-        public ApplicationUser Executor { get; set; }
+        public virtual List<BoughtArticle> Articles { get; set; } = new List<BoughtArticle>();        
+        public string? ExecutorId { get; set; }
+        public ApplicationUser? Executor { get; set; }
     }
 }

@@ -79,7 +79,6 @@
             <th>Description</th>
             <th>Cash Amount</th>
             <th>Article Count</th>
-            <th>Executor Name</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -90,9 +89,8 @@
             <td>@payment.PaymentId</td>
             <td>@payment.Date</td>
             <td>@payment.Description</td>
-            <td>@payment.CashAmount</td>
+            <td>@payment.CashAmount €</td>
             <td>@payment.Articles.Count</td>
-            <td>@payment.Executor.UserName</td>
             <td>
                 <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
             </td>
@@ -111,10 +109,10 @@
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
-            <table class="table table-striped">
+            <table class="table table-fixed table-striped">
                 <thead>
                     <tr>
-                        <th>Payment Id</th>
+                        <th>Topup Id</th>
                         <th>Date</th>
                         <th>Description</th>
                         <th>Cash Amount</th>
@@ -129,10 +127,10 @@
                         <td>@topup.TopUpId</td>
                         <td>@topup.Date</td>
                         <td>@topup.Description</td>
-                        <td>@topup.CashAmount</td>
+                        <td>@topup.CashAmount €</td>
                         <td>@topup.Executor.UserName</td>
                         <td>
-                            <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Details" asp-route-topupId="@topup.TopUpId">Details</a>
+                            <a class="btn btn-primary"  asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-topupId="@topup.TopUpId">Details</a>
                         </td>
                     </tr>
                     }
@@ -142,4 +140,4 @@
     </div>
   </div>
 </div>
-<a class="btn btn-warning" href="~/UserRoles">Go Back</a>
+<a class="btn btn-warning" onclick="history.go(-1)">Go Back To Last Page</a>

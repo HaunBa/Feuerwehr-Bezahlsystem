@@ -26,7 +26,7 @@
                     @for (int x = i; x < i+3 && x < drinks.Count; x++)
                     {
                         <div class="col">
-                            <a asp-action="AddToCart" asp-route-artId="@drinks[x].Id" style="color: black; text-decoration:none">
+                            <a asp-action="Buy" asp-route-id="@drinks[x].Id" style="color: black; text-decoration:none">
                                 <div class="card" style="width: 18rem;">
                               <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
                                   <div class="card-body">
@@ -63,20 +63,39 @@
         }else
         {
             @foreach(var item in Model.Where(x => x.Type == "Food")){
-                <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-                  <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">
-                        <div>
-                            <strong>Price:</strong> @item.PriceAmount €
+                @if (item.Amount == 0)
+                {
+                    <div class="card" disabled style="width: 18rem;">
+                        <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
+                        <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">
+                            <div>
+                                <strong>Price:</strong> @item.PriceAmount €
+                            </div>
+                            <div>
+                                <strong>Amount Left:</strong> @item.Amount
+                            </div>
+                        </p>
                         </div>
-                        <div>
-                            <strong>Amount Left:</strong> @item.Amount
+                    </div>
+                }else
+                {
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
+                        <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">
+                            <div>
+                                <strong>Price:</strong> @item.PriceAmount €
+                            </div>
+                            <div>
+                                <strong>Amount Left:</strong> @item.Amount
+                            </div>
+                        </p>
                         </div>
-                    </p>
-                  </div>
-                </div>
+                    </div>
+                }
             }        
         }
         <br />
@@ -126,7 +145,7 @@
                                 <td>@item.PriceAmount</td>
                                 <td>@item.Amount</td>
                                 <td>@(item.PriceAmount * item.Amount)</td>                        
-                                <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Id">Remove</a></td>
+                                <td><a asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">Remove</a></td>
                             </tr>
                         }
                     }
@@ -137,7 +156,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <a class="btn btn-primary" asp-controller="Products" asp-action="Buy">Buy</a>
+                        <a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">Buy</a>
                     </tr>
                 </table>
             </div>

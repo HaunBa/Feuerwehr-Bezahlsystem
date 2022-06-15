@@ -16,6 +16,7 @@ namespace TestingApp.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<TopUp> TopUps { get; set; }
+        public DbSet<BoughtArticle> BoughtArticles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

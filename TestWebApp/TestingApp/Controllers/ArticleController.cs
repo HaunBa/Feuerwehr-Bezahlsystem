@@ -6,7 +6,7 @@ using TestingApp.ViewModels;
 
 namespace TestingApp.Controllers
 {
-    [Authorize(Roles = "User, Admin")]
+    [Authorize(Roles = "User, Admin, SuperAdmin")]
     public class ArticleController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -156,6 +156,18 @@ namespace TestingApp.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var art = _context.Articles.FirstOrDefault(x => x.Id == id);
+            if (art != null)
+            {
+                _context.Articles.Remove(art);
+                await _context.SaveChangesAsync();
+            }
+
+            return Redirect("~/Article");
         }
     }
 }

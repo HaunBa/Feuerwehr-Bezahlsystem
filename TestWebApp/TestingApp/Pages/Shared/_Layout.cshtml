@@ -28,7 +28,7 @@
                         <li>
                             <a class="nav-link text-dark" href="~/Products">Products</a>
                         </li>
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("SuperAdmin"))
                         {
                             <li>
                                 <a class="nav-link text-dark" href="~/RoleManager">Role Manager</a>

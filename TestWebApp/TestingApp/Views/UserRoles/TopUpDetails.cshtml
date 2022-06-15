@@ -27,26 +27,13 @@
     <dd class="col-sm-10">
         @Html.DisplayFor(model => model.Description)
     </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Executor.UserName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Executor.UserName)
+    </dd>
     
 </dl>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Article Id</th>
-            <th>Name</th>
-            <th>Price Amount</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var art in Model.Articles)
-        {
-        <tr>
-            <td>@art.Id</td>
-            <td>@art.Name</td>
-            <td>@art.Price.Amount</td>
-        </tr>
-        }
-    </tbody>
-</table>
 <a class="btn btn-warning" onclick="history.go(-1)">Go Back</a>

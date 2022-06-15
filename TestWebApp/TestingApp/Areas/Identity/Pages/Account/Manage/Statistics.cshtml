@@ -1,0 +1,36 @@
+﻿@page
+@model StatisticsModel
+@{
+    ViewData["Title"] = "Statistics";
+    ViewData["ActivePage"] = ManageNavPages.Statistics;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Chart 1
+            <canvas id="chart1" width="400" height="400"></canvas>
+        </div>
+        <div class="col">
+            Chart 2
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Chart 3
+        </div>
+        <div class="col">
+            Chart 4
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var ctx = document.getElementById('chart1');
+        var chart1 = new Chart(ctx, @Html.Raw(Model.ChartJson));
+    });
+</script>
+}

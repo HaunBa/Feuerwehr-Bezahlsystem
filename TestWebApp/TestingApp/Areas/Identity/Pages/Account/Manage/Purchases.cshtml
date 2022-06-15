@@ -1,0 +1,61 @@
+﻿@page
+@using TestingApp.Data
+@inject ApplicationDbContext _context
+@model TestingApp.Areas.Identity.Pages.Account.Manage.PurchasesModel
+@{
+    ViewData["Title"] = "Purchases";
+    ViewData["ActivePage"] = ManageNavPages.Purchases;
+
+    var user = _context.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+    var payments = _context.Payments.Where(x => x.PersonId == user.Id).OrderByDescending(x => x.Date);
+}
+
+<style>
+.table-fixed{
+  width: 100%;
+  background-color: #f3f3f3;
+}
+tbody{
+height:400px;
+overflow-y:scroll;
+width: 100%;
+}
+
+
+</style>
+
+<h3>Purchases</h3>
+<table class="table table-fixed table-striped">
+    <thead>
+        <tr>
+            <th>Payment Id</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Cash Amount</th>
+            <th>Article Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in payments)
+        {
+        <tr>
+            <td>@payment.PaymentId</td>
+            <td>@payment.Date</td>
+            <td>@payment.Description</td>
+            <td>@payment.CashAmount</td>
+            <td>@payment.Articles.Count</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<h3>Top-Ups</h3>
+
+
+
+<a class="btn btn-warning" onclick="history.go(-1)">Go Back</a>

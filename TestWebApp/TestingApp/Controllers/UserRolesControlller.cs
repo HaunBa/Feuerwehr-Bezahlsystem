@@ -6,7 +6,7 @@ using TestingApp.ViewModels;
 
 namespace TestingApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class UserRolesController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -50,6 +50,8 @@ namespace TestingApp.Controllers
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
+        [Authorize(Roles = "User, Admin, SuperAdmin")]
+
         public async Task<IActionResult> Details(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -68,12 +70,11 @@ namespace TestingApp.Controllers
             vm.Balance = user.Balance;
 
             return View(vm);
-
         }
 
         public async Task<IActionResult> PaymentDetails (int paymentId)
         {
-            var payment = await _context.Payments.FindAsync(paymentId);
+            var payment = await _context.Payments.Include(x => x.Articles).ThenInclude(x => x.Price).FirstOrDefaultAsync(x => x.PaymentId == paymentId);
             if (payment == null) return NotFound();
 
             var vm = new PaymentVM
@@ -83,10 +84,28 @@ namespace TestingApp.Controllers
                 CashAmount = payment.CashAmount,
                 Date = payment.Date,
                 Description = payment.Description,
-                Executor = payment.Executor,
-                ExecutorId = payment.ExecutorId,
                 Person = payment.Person,
                 PersonId = payment.PersonId
+            };
+
+            return View(vm);
+        }
+
+        public async Task<IActionResult> TopUpDetails(int topupid)
+        {
+            var topup = await _context.TopUps.Include(x => x.Executor).FirstOrDefaultAsync(x => x.TopUpId == topupid);
+            if (topup == null) return NotFound();
+
+            var vm = new PaymentVM
+            {
+                PaymentId = topupid,
+                CashAmount = topup.CashAmount,
+                Date = topup.Date,
+                Description = topup.Description,
+                Executor = topup.Executor,
+                ExecutorId = topup.ExecutorId,
+                Person = topup.Person,
+                PersonId = topup.PersonId
             };
 
             return View(vm);
@@ -129,7 +148,7 @@ namespace TestingApp.Controllers
 
             double dif = userRolesVm.Balance - user.Balance;
 
-            // payment
+            // topup
             if (dif < 0)
             {
                 var payment = new Payment
@@ -154,7 +173,9 @@ namespace TestingApp.Controllers
                     Date = DateTime.Now,
                     Description = $"Payment on {DateTime.Now.ToString("g")} over {dif} €",
                     PersonId = user.Id,
-                    ExecutorId = executor.Id
+                    Person = user,
+                    ExecutorId = executor.Id,
+                    Executor = executor
                 };
 
                 user.Balance += dif;
