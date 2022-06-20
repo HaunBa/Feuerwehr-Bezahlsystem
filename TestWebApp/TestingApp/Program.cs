@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using TestingApp.Data;
 using TestingApp.Models;
 
@@ -15,6 +16,11 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI()
         .AddDefaultTokenProviders();
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddMvc()
+    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
@@ -39,6 +45,18 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred seeding the DB.");
     }
 }
+
+var cultures = new List<CultureInfo>
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("de-DE")
+};
+
+app.UseRequestLocalization(options => {
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("de");
+    options.SupportedCultures = cultures;
+    options.SupportedUICultures = cultures;
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

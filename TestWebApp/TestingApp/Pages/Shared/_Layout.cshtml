@@ -51,11 +51,21 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <br />
+        <br />
+        <br />
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="margin-top: 10px">
         <div class="container">
-            &copy; 2022 - TestingApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row">
+                <div class="col">
+                    &copy; 2022 - TestingApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+                <div class="col">
+                    @await Html.PartialAsync("_CulturePartial");
+                </div>
+            </div>
         </div>
     </footer>
 

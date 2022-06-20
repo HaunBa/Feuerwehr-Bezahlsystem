@@ -254,6 +254,7 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
 
                 DonutChart.data.datasets[0].data = datas.ToArray();
                 DonutChart.data.datasets[0].label = label;
+                DonutChart.data.labels = DonutChart.data.labels.Append(label).ToArray(); 
             }
 
             DonutChartJson = JsonConvert.SerializeObject(DonutChart, new JsonSerializerSettings

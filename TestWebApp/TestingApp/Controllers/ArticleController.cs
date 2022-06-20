@@ -44,9 +44,9 @@ namespace TestingApp.Controllers
         {
             if (Request.Form.Files.Count > 0)
             {
-                IFormFile file = Request.Form.Files.FirstOrDefault();
                 using (var dataStream = new MemoryStream())
                 {
+                    IFormFile? file = Request.Form.Files.FirstOrDefault();
                     await file.CopyToAsync(dataStream);
                     articleVm.ImageData = dataStream.ToArray();
                 }

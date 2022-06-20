@@ -1,0 +1,110 @@
+﻿Default;Default;en;de
+ArticlesNav;Articles;Articles;Artikel
+HomeNav;Home;Home;Home 
+LoginNav;Login;Login;Einloggen
+LogoutNav;Logout;Logout;Ausloggen
+PrivacyNav;Privacy;Privacy;Privatsphäre
+ProductsNav;Products;Products;Produkte
+RoleManagerNav;Role Manager;Role Manager;Rollen Manager
+UserGreetingNav;Hello {0};Hello {0};Hallo {0}
+UsersNav;Users;Users;Benutzer
+ActionArticle;Action;Action;Aktion
+ActionProduct;Action;Action;Aktion
+ActionRole;Action;Action;Aktion
+ActionUser;Action;Action;Aktion
+AddRole;Add;Add;Hinzufügen
+AllProductsProduct;All Products;All Products;Alle Produkte
+AllUsersUser;All Users;All Users;Alle Benutzer
+AmountArticle;Article;Article;Artikel
+AmountEditArticle;Amount;Amount;Anzahl
+ArticleImageTitleEditArticle;Article Image;Article Image;Artikel Bild
+ArticlePercentageTitle;Article Percentage;Article Percentage;Artikel Prozentanteil
+ArticlesTitleArticles;All Articles;All Articles;Alle Artikel
+ArticleTypeEditArticle;ArticleType;ArticleType;Artikel Typ
+BalanceTitleUserInfo;Balance;Balance;Kontostand
+BalanceUser;Balance;Balance;Kontostand
+BalanceUserInfo;Balance;Balance;Kontostand
+BuyProduct;Buy;Buy;Kaufen
+Chart 3;Chart 3;Chart 3;Diagramm 3
+Chart 4;Chart 4;Chart 4;Diagramm 4
+CommentUser;Comment;Comment;Kommentar
+CommentUserInfo;Comment;Comment;Kommentar
+ConfirmNewChangePassword;Confirm new Password;Confirm new Password;Neues Passwort bestätigen
+CreateNewArticle;Create New;Create New;Neuer Artikel
+CurrentChangePassword;Current Password;Current Password;Aktuelles Passwort
+DeleteArticleEditArticle;Delete Article;Delete Article;Artikel Entfernen
+DeletePersonalData;Delete;Delete;Löschen
+DeleteRole;Delete;Delete;Löschen
+DescriptionBoldPersonalData;Deleting this data will permanently remove your account, this cannot be undone.;Deleting this data will permanently remove your account, this cannot be undone.;Durch das Löschen dieser Daten wird Ihr Konto dauerhaft entfernt, dies kann nicht rückgängig gemacht werden.
+DescriptionPersonalData;Your account contains personal data that you have given us. This page allows you to download or delete that data.;Your account contains personal data that you have given us. This page allows you to download or delete that data.;Ihr Konto enthält personenbezogene Daten, die Sie uns mitgeteilt haben. Auf dieser Seite können Sie diese Daten herunterladen oder löschen.
+DetailsUser;Details;Details;Details
+DownloadPersonalData;Download;Download;Herunterladen
+DrinkChartTitle;Drink;Drink;Getränke
+DrinksProduct;Drinks;Drinks;Getränke
+EditArticle;Edit Article;Edit Article;Artikel Bearbeiten
+EditRole;Edit;Edit;Bearbeiten
+EditUser;Edit;Edit;Bearbeiten
+ElseProduct;Else;Else;Sonstige
+FirstNameUser;First Name;First Name;Vorname
+FirstNameUserInfo;First Name;First Name;Vorname
+FirstNameUserProfile;First Name;First Name;Vorname
+FoodProduct;Food;Food;Essen
+GoBackEditArticle;Go Back;Go Back;Zurück
+GoBackUserDetails;Go Back;Go Back;Zurück
+GoBackUserInfo;Go Back;Go Back;Zurück
+IdRole;Id;Id;Id
+LastNameUser;Last Name;Last Name;Nachname
+LastNameUserInfo;Last Name;Last Name;Nachname
+LastNameUserProfile;Last Name;Last Name;Nachname
+NameArticle;Name;Name;Name
+NameEditArticle;Name;Name;Name
+NameProduct;Name;Name;Name
+NewChangePassword;New Password;New Password;Neues Passwort
+NothingLeftProduct;Nothing Left...;Nothing Left...;Keine Artikel vorhanden
+OpenCheckoutDateUser;Open Checkout Date;Open Checkout Date;Datum der offenen Kassa
+OpenCheckoutDateUserInfo;Open Checkout Date;Open Checkout Date;Datum der offenen Kassa
+OpenCheckoutValueUser;Open Checkout Value;Open Checkout Value;Maximaler Betrag bei offener Kassa
+OpenCheckoutValueUserInfo;Open Checkout Value;Open Checkout Value;Maximaler Betrag bei offener Kassa
+PasswordNavManageUser;Password;Password;Passwort
+PaymentActionUserDetails;Action;Action;Aktion
+PaymentArticleCountUserDetails;Article Count;Article Count;Artikel Anzahl
+PaymentCashAmountUserDetails;Cash Amount;Cash Amount;Gesamtkosten
+PaymentDateUserDetails;Date;Date;Datum  
+PaymentDescriptionUserDetails;Description;Description;Beschreibung
+PaymentDetailsUserDetails;Details;Details;Details
+PaymentIdUserDetails;Payment Id;Payment Id;Kauf Id
+PaymentUserDetails;Payments;Payments;Käufe
+PersonalDataNavManageUser;Personal Data;Personal Data;Persönliche Daten
+PriceAmountEditArticle;Price Amount;Price Amount;Preis
+PriceArticle;Price;Price;Preis
+PriceProduct;Price;Price;Preis
+PriceSinceArticle;Price Since;Price Since;Preis seit
+PriceUntilArticle;Price Until;Price Until;Preis bis
+ProfileNavManageUser;Profile;Profile;Profil
+PurchasesNavManageUser;Purchases;Purchases;Käufe
+QuantityProduct;Quantity;Quantity;Menge
+RoleRole;Role;Role;Rolle 
+RoleTitleUserInfo;Role;Role;Rolle
+RoleUser;Role;Role;Rolle
+SaveEditArticle;Save;Save;Speichern
+SaveUserInfo;Save;Save;Speichern
+SaveUserProfile;Save;Save;Speichern
+StatisticsNavManageUser;Statistics;Statistics;Statistiken
+SubtitleManageUser;Change your Account Settings;Change your Account Settings;Ändern Sie Ihre Kontoeinstellungen
+SubtotalProduct;Subtotal;Subtotal;Zwischensumme
+SumProduct;Sum;Sum;Summe
+TitleChangePassword;Change Password;Change Password;Passwort ändern
+TitleManageUser;Manage your Account;Manage your Account;Verwalten Sie Ihr Konto
+TitlePersonalData;Personal Data;Personal Data;Persönliche Daten
+TitleUserProfile;Profile;Profile;Profil
+TopupActionUserDetails;Action;Action;Aktion
+TopupCashamountUserDetails;Cash Amount;Cash Amount;Gesamtkosten
+TopupDateUserDetails;Date;Date;Datum
+TopupDescriptionUserDetails;Description;Description;Beschreibung
+TopupDetailsUserDetails;Details;Details;Details
+TopupExecutorNameUserDetails;Executor Name;Executor Name;Name des Ausführenden
+TopupIdUserDetails;Topup Id;Topup Id;Aufladungs Id
+TopupUserDetails;TopUps;TopUps;Aufladungen
+TwoFactorNavManageUser;Two-factor authentecation;Two-factor authentecation;Zwei-Faktor-Authentifizierung
+UserInfoUserInfo;User Info;User Info;Benutzer Info
+UsernameUserProfile;Username;Username;Benutzername

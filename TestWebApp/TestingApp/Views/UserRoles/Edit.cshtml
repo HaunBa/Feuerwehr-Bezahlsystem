@@ -78,10 +78,9 @@
           <div class="accordion-body">
             <select asp-for="Role" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option selected>@userRole</option>
-              @foreach (var item in rolesWOUser)
-                {
-                            
-                <option value="@item">@item</option>
+                @foreach (var item in rolesWOUser)
+                {                            
+                    <option value="@item">@item</option>
                 }
             </select>
           </div>
@@ -90,6 +89,6 @@
     </div>
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
-        <a class="btn btn-warning" href="~/UserRoles">Go Back</a>
+        <a class="btn btn-warning" onclick="history.go(-1)">Go Back To Last Page</a>
     </div>
 </form>
