@@ -59,178 +59,178 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Default" xml:space="preserve">
-    <value>Default</value>
+    <value>de</value>
   </data>
   <data name="ArticlesNav" xml:space="preserve">
-    <value>Articles</value>
+    <value>Artikel</value>
   </data>
   <data name="HomeNav" xml:space="preserve">
-    <value>Home</value>
+    <value>Home </value>
   </data>
   <data name="LoginNav" xml:space="preserve">
-    <value>Login</value>
+    <value>Einloggen</value>
   </data>
   <data name="LogoutNav" xml:space="preserve">
-    <value>Logout</value>
+    <value>Ausloggen</value>
   </data>
   <data name="PrivacyNav" xml:space="preserve">
-    <value>Privacy</value>
+    <value>Privatsphäre</value>
   </data>
   <data name="ProductsNav" xml:space="preserve">
-    <value>Products</value>
+    <value>Produkte</value>
   </data>
   <data name="RoleManagerNav" xml:space="preserve">
-    <value>Role Manager</value>
+    <value>Rollen Manager</value>
   </data>
   <data name="UserGreetingNav" xml:space="preserve">
-    <value>Hello {0}</value>
+    <value>Hallo {0}</value>
   </data>
   <data name="UsersNav" xml:space="preserve">
-    <value>Users</value>
+    <value>Benutzer</value>
   </data>
   <data name="ActionArticle" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="ActionProduct" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="ActionRole" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="ActionUser" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="AddRole" xml:space="preserve">
-    <value>Add</value>
+    <value>Hinzufügen</value>
   </data>
   <data name="AllProductsProduct" xml:space="preserve">
-    <value>All Products</value>
+    <value>Alle Produkte</value>
   </data>
   <data name="AllUsersUser" xml:space="preserve">
-    <value>All Users</value>
+    <value>Alle Benutzer</value>
   </data>
   <data name="AmountArticle" xml:space="preserve">
-    <value>Article</value>
+    <value>Artikel</value>
   </data>
   <data name="AmountEditArticle" xml:space="preserve">
-    <value>Amount</value>
+    <value>Anzahl</value>
   </data>
   <data name="ArticleImageTitleEditArticle" xml:space="preserve">
-    <value>Article Image</value>
+    <value>Artikel Bild</value>
   </data>
   <data name="ArticlePercentageTitle" xml:space="preserve">
-    <value>Article Percentage</value>
+    <value>Artikel Prozentanteil</value>
   </data>
   <data name="ArticlesTitleArticles" xml:space="preserve">
-    <value>All Articles</value>
+    <value>Alle Artikel</value>
   </data>
   <data name="ArticleTypeEditArticle" xml:space="preserve">
-    <value>ArticleType</value>
+    <value>Artikel Typ</value>
   </data>
   <data name="BalanceTitleUserInfo" xml:space="preserve">
-    <value>Balance</value>
+    <value>Kontostand</value>
   </data>
   <data name="BalanceUser" xml:space="preserve">
-    <value>Balance</value>
+    <value>Kontostand</value>
   </data>
   <data name="BalanceUserInfo" xml:space="preserve">
-    <value>Balance</value>
+    <value>Kontostand</value>
   </data>
   <data name="BuyProduct" xml:space="preserve">
-    <value>Buy</value>
+    <value>Kaufen</value>
   </data>
   <data name="Chart 3" xml:space="preserve">
-    <value>Chart 3</value>
+    <value>Diagramm 3</value>
   </data>
   <data name="Chart 4" xml:space="preserve">
-    <value>Chart 4</value>
+    <value>Diagramm 4</value>
   </data>
   <data name="CommentUser" xml:space="preserve">
-    <value>Comment</value>
+    <value>Kommentar</value>
   </data>
   <data name="CommentUserInfo" xml:space="preserve">
-    <value>Comment</value>
+    <value>Kommentar</value>
   </data>
   <data name="ConfirmNewChangePassword" xml:space="preserve">
-    <value>Confirm new Password</value>
+    <value>Neues Passwort bestätigen</value>
   </data>
   <data name="CreateNewArticle" xml:space="preserve">
-    <value>Create New</value>
+    <value>Neuer Artikel</value>
   </data>
   <data name="CurrentChangePassword" xml:space="preserve">
-    <value>Current Password</value>
+    <value>Aktuelles Passwort</value>
   </data>
   <data name="DeleteArticleEditArticle" xml:space="preserve">
-    <value>Delete Article</value>
+    <value>Artikel Entfernen</value>
   </data>
   <data name="DeletePersonalData" xml:space="preserve">
-    <value>Delete</value>
+    <value>Löschen</value>
   </data>
   <data name="DeleteRole" xml:space="preserve">
-    <value>Delete</value>
+    <value>Löschen</value>
   </data>
   <data name="DescriptionBoldPersonalData" xml:space="preserve">
-    <value>Deleting this data will permanently remove your account, this cannot be undone.</value>
+    <value>Durch das Löschen dieser Daten wird Ihr Konto dauerhaft entfernt, dies kann nicht rückgängig gemacht werden.</value>
   </data>
   <data name="DescriptionPersonalData" xml:space="preserve">
-    <value>Your account contains personal data that you have given us. This page allows you to download or delete that data.</value>
+    <value>Ihr Konto enthält personenbezogene Daten, die Sie uns mitgeteilt haben. Auf dieser Seite können Sie diese Daten herunterladen oder löschen.</value>
   </data>
   <data name="DetailsUser" xml:space="preserve">
     <value>Details</value>
   </data>
   <data name="DownloadPersonalData" xml:space="preserve">
-    <value>Download</value>
+    <value>Herunterladen</value>
   </data>
   <data name="DrinkChartTitle" xml:space="preserve">
-    <value>Drink</value>
+    <value>Getränke</value>
   </data>
   <data name="DrinksProduct" xml:space="preserve">
-    <value>Drinks</value>
+    <value>Getränke</value>
   </data>
   <data name="EditArticle" xml:space="preserve">
-    <value>Edit Article</value>
+    <value>Artikel Bearbeiten</value>
   </data>
   <data name="EditRole" xml:space="preserve">
-    <value>Edit</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="EditUser" xml:space="preserve">
-    <value>Edit</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="ElseProduct" xml:space="preserve">
-    <value>Else</value>
+    <value>Sonstige</value>
   </data>
   <data name="FirstNameUser" xml:space="preserve">
-    <value>First Name</value>
+    <value>Vorname</value>
   </data>
   <data name="FirstNameUserInfo" xml:space="preserve">
-    <value>First Name</value>
+    <value>Vorname</value>
   </data>
   <data name="FirstNameUserProfile" xml:space="preserve">
-    <value>First Name</value>
+    <value>Vorname</value>
   </data>
   <data name="FoodProduct" xml:space="preserve">
-    <value>Food</value>
+    <value>Essen</value>
   </data>
   <data name="GoBackEditArticle" xml:space="preserve">
-    <value>Go Back</value>
+    <value>Zurück</value>
   </data>
   <data name="GoBackUserDetails" xml:space="preserve">
-    <value>Go Back</value>
+    <value>Zurück</value>
   </data>
   <data name="GoBackUserInfo" xml:space="preserve">
-    <value>Go Back</value>
+    <value>Zurück</value>
   </data>
   <data name="IdRole" xml:space="preserve">
     <value>Id</value>
   </data>
   <data name="LastNameUser" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Nachname</value>
   </data>
   <data name="LastNameUserInfo" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Nachname</value>
   </data>
   <data name="LastNameUserProfile" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Nachname</value>
   </data>
   <data name="NameArticle" xml:space="preserve">
     <value>Name</value>
@@ -242,150 +242,150 @@
     <value>Name</value>
   </data>
   <data name="NewChangePassword" xml:space="preserve">
-    <value>New Password</value>
+    <value>Neues Passwort</value>
   </data>
   <data name="NothingLeftProduct" xml:space="preserve">
-    <value>Nothing Left...</value>
+    <value>Keine Artikel vorhanden</value>
   </data>
   <data name="OpenCheckoutDateUser" xml:space="preserve">
-    <value>Open Checkout Date</value>
+    <value>Datum der offenen Kassa</value>
   </data>
   <data name="OpenCheckoutDateUserInfo" xml:space="preserve">
-    <value>Open Checkout Date</value>
+    <value>Datum der offenen Kassa</value>
   </data>
   <data name="OpenCheckoutValueUser" xml:space="preserve">
-    <value>Open Checkout Value</value>
+    <value>Maximaler Betrag bei offener Kassa</value>
   </data>
   <data name="OpenCheckoutValueUserInfo" xml:space="preserve">
-    <value>Open Checkout Value</value>
+    <value>Maximaler Betrag bei offener Kassa</value>
   </data>
   <data name="PasswordNavManageUser" xml:space="preserve">
-    <value>Password</value>
+    <value>Passwort</value>
   </data>
   <data name="PaymentActionUserDetails" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="PaymentArticleCountUserDetails" xml:space="preserve">
-    <value>Article Count</value>
+    <value>Artikel Anzahl</value>
   </data>
   <data name="PaymentCashAmountUserDetails" xml:space="preserve">
-    <value>Cash Amount</value>
+    <value>Gesamtkosten</value>
   </data>
   <data name="PaymentDateUserDetails" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum  </value>
   </data>
   <data name="PaymentDescriptionUserDetails" xml:space="preserve">
-    <value>Description</value>
+    <value>Beschreibung</value>
   </data>
   <data name="PaymentDetailsUserDetails" xml:space="preserve">
     <value>Details</value>
   </data>
   <data name="PaymentIdUserDetails" xml:space="preserve">
-    <value>Payment Id</value>
+    <value>Kauf Id</value>
   </data>
   <data name="PaymentUserDetails" xml:space="preserve">
-    <value>Payments</value>
+    <value>Käufe</value>
   </data>
   <data name="PersonalDataNavManageUser" xml:space="preserve">
-    <value>Personal Data</value>
+    <value>Persönliche Daten</value>
   </data>
   <data name="PriceAmountEditArticle" xml:space="preserve">
-    <value>Price Amount</value>
+    <value>Preis</value>
   </data>
   <data name="PriceArticle" xml:space="preserve">
-    <value>Price</value>
+    <value>Preis</value>
   </data>
   <data name="PriceProduct" xml:space="preserve">
-    <value>Price</value>
+    <value>Preis</value>
   </data>
   <data name="PriceSinceArticle" xml:space="preserve">
-    <value>Price Since</value>
+    <value>Preis seit</value>
   </data>
   <data name="PriceUntilArticle" xml:space="preserve">
-    <value>Price Until</value>
+    <value>Preis bis</value>
   </data>
   <data name="ProfileNavManageUser" xml:space="preserve">
-    <value>Profile</value>
+    <value>Profil</value>
   </data>
   <data name="PurchasesNavManageUser" xml:space="preserve">
-    <value>Purchases</value>
+    <value>Käufe</value>
   </data>
   <data name="QuantityProduct" xml:space="preserve">
-    <value>Quantity</value>
+    <value>Menge</value>
   </data>
   <data name="RoleRole" xml:space="preserve">
-    <value>Role</value>
+    <value>Rolle </value>
   </data>
   <data name="RoleTitleUserInfo" xml:space="preserve">
-    <value>Role</value>
+    <value>Rolle</value>
   </data>
   <data name="RoleUser" xml:space="preserve">
-    <value>Role</value>
+    <value>Rolle</value>
   </data>
   <data name="SaveEditArticle" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="SaveUserInfo" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="SaveUserProfile" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="StatisticsNavManageUser" xml:space="preserve">
-    <value>Statistics</value>
+    <value>Statistiken</value>
   </data>
   <data name="SubtitleManageUser" xml:space="preserve">
-    <value>Change your Account Settings</value>
+    <value>Ändern Sie Ihre Kontoeinstellungen</value>
   </data>
   <data name="SubtotalProduct" xml:space="preserve">
-    <value>Subtotal</value>
+    <value>Zwischensumme</value>
   </data>
   <data name="SumProduct" xml:space="preserve">
-    <value>Sum</value>
+    <value>Summe</value>
   </data>
   <data name="TitleChangePassword" xml:space="preserve">
-    <value>Change Password</value>
+    <value>Passwort ändern</value>
   </data>
   <data name="TitleManageUser" xml:space="preserve">
-    <value>Manage your Account</value>
+    <value>Verwalten Sie Ihr Konto</value>
   </data>
   <data name="TitlePersonalData" xml:space="preserve">
-    <value>Personal Data</value>
+    <value>Persönliche Daten</value>
   </data>
   <data name="TitleUserProfile" xml:space="preserve">
-    <value>Profile</value>
+    <value>Profil</value>
   </data>
   <data name="TopupActionUserDetails" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="TopupCashamountUserDetails" xml:space="preserve">
-    <value>Cash Amount</value>
+    <value>Gesamtkosten</value>
   </data>
   <data name="TopupDateUserDetails" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="TopupDescriptionUserDetails" xml:space="preserve">
-    <value>Description</value>
+    <value>Beschreibung</value>
   </data>
   <data name="TopupDetailsUserDetails" xml:space="preserve">
     <value>Details</value>
   </data>
   <data name="TopupExecutorNameUserDetails" xml:space="preserve">
-    <value>Executor Name</value>
+    <value>Name des Ausführenden</value>
   </data>
   <data name="TopupIdUserDetails" xml:space="preserve">
-    <value>Topup Id</value>
+    <value>Aufladungs Id</value>
   </data>
   <data name="TopupUserDetails" xml:space="preserve">
-    <value>TopUps</value>
+    <value>Aufladungen</value>
   </data>
   <data name="TwoFactorNavManageUser" xml:space="preserve">
-    <value>Two-factor authentecation</value>
+    <value>Zwei-Faktor-Authentifizierung</value>
   </data>
   <data name="UserInfoUserInfo" xml:space="preserve">
-    <value>User Info</value>
+    <value>Benutzer Info</value>
   </data>
   <data name="UsernameUserProfile" xml:space="preserve">
-    <value>Username</value>
+    <value>Benutzername</value>
   </data>
 </root>

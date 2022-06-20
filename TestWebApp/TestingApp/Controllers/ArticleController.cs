@@ -113,6 +113,7 @@ namespace TestingApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Amount,ImageData,Type,Priceid,Since,Until,PriceAmount")] ArticleWithPriceVM articleVm)
         {
+            var art = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
             if (Request.Form.Files.Count > 0)
             {
                 IFormFile file = Request.Form.Files.FirstOrDefault();
@@ -121,6 +122,9 @@ namespace TestingApp.Controllers
                     await file.CopyToAsync(dataStream);
                     articleVm.ImageData = dataStream.ToArray();
                 }
+            }else if (art != null && art.ImageData != Array.Empty<byte>())
+            {
+                articleVm.ImageData = art.ImageData;
             }
             else
             {
@@ -129,7 +133,6 @@ namespace TestingApp.Controllers
 
             if (ModelState.ErrorCount <= 1)
             {
-                var art = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
                 var fprice = await _context.Prices.FirstOrDefaultAsync(x => x.Amount == articleVm.PriceAmount);
 
                 if (fprice == null)

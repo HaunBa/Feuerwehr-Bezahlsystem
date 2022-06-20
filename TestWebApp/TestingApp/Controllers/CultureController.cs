@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
 namespace TestingApp.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LanguageController : ControllerBase
+    public class CultureController : Controller
     {
-        private readonly IStringLocalizer<LanguageController> _localizer;
-        public LanguageController(IStringLocalizer<LanguageController> localizer)
+        [HttpPost]
+        public IActionResult SetCulture(string culture, string returnUrl)
         {
-            _localizer = localizer;
-        }
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var guid = Guid.NewGuid();
-            return Ok(_localizer["RandomGUID", guid.ToString()].Value);
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+            return LocalRedirect(returnUrl);
         }
     }
 }
