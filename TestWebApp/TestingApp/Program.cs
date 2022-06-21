@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 using TestingApp.Data;
 using TestingApp.Models;
+using TestingApp.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,24 +21,42 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
         .AddDefaultUI()
         .AddDefaultTokenProviders();
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization(options =>
+{
+    options.ResourcesPath = "Resources";
+});
 
-builder.Services.AddMvc()
-    .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder)
-    .AddDataAnnotationsLocalization();
+// "en-US","de-AT", "de-DE", "fr-FR"
 
-builder.Services.AddRazorPages();
+var cultures = new List<CultureInfo>()
+{
+    new CultureInfo("de"),
+    new CultureInfo("en")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.SetDefaultCulture(cultures[0].Name);
+    options.SupportedUICultures = cultures;
+    options.SupportedCultures = cultures;
+    options.FallBackToParentUICultures = true;
+
+    options
+    .RequestCultureProviders
+    .Clear();
+});
+
+builder.Services
+    .AddRazorPages()
+    .AddViewLocalization();
+
+builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
+
 builder.Services.AddSession();
 
 var app = builder.Build();
 
-var supportedCultures = new[] { "de-AT", "de", "en-US", "fr" };
-
-var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-
-app.UseRequestLocalization(localizationOptions);
+app.UseRequestLocalization();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -75,6 +95,9 @@ app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRequestLocalization();
+
+app.UseRequestLocalizationCookies();
 
 app.UseRouting();
 

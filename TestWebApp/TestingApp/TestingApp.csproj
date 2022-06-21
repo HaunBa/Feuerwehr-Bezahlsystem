@@ -17,7 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Pages\" />
+    <Folder Include="Resources\Pages\Home\" />
+    <Folder Include="Resources\Views\" />
   </ItemGroup>
 
 </Project>
