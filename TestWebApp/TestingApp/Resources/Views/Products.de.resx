@@ -117,10 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="More Info" xml:space="preserve">
-    <value>More Info</value>
+  <data name="Action" xml:space="preserve">
+    <value>Aktion</value>
   </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
+  <data name="AllProducts" xml:space="preserve">
+    <value>Alle Produkte</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Bezahlen</value>
+  </data>
+  <data name="Drinks" xml:space="preserve">
+    <value>Getränke</value>
+  </data>
+  <data name="Else" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>Speisen</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nothing Left" xml:space="preserve">
+    <value>Keine Artikel vorhanden...</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="Sub Total" xml:space="preserve">
+    <value>Zwischensumme</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Summe</value>
   </data>
 </root>

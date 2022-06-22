@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10">
-    <h1>@_loc["All Products"]</h1>
+    <h1>@_loc["AllProducts"]</h1>
     <br />
     <h2>@_loc["Drinks"]</h2>
     <hr />
@@ -129,7 +129,7 @@
         </div>
         <!-- Cart -->
         <div class="col-sm-1">
-            <div class="container" style="position: fixed; right: 0; width: 30%">
+            <div class="container" style="position: fixed; right: 0; width: 28%">
                 <table class="table table-striped" style="position: sticky">
                     <tr>
                         <th>@_loc["Name"]</th>
@@ -149,17 +149,18 @@
                                 <td>@(item.PriceAmount * item.Amount)</td>                        
                                 <td><a asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">@_loc["Remove"]</a></td>
                             </tr>
+                            <tr>
+                                <td>@_loc["Sum"]</td>
+                                <td>
+                                    @ViewBag.total
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a></td>
+                            </tr>
                         }
                     }
-                    <tr>
-                        <td>@_loc["Sum"]</td>
-                        <td>
-                            @ViewBag.total
-                        </td>
-                    </tr>
-                    <tr>
-                        <a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a>
-                    </tr>
+                    
                 </table>
             </div>
         </div>

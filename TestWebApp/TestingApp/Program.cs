@@ -48,7 +48,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 builder.Services
     .AddRazorPages()
-    .AddViewLocalization();
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 

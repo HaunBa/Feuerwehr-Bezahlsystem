@@ -8,14 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Resources\Pages\Products\Index.de.resx" />
+    <EmbeddedResource Remove="Resources\Pages\Products\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Create.de.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Create.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Edit.de.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Edit.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Index.de.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Index.en.resx" />
+    <EmbeddedResource Remove="Resources\Views\Products.de.resx" />
+    <EmbeddedResource Remove="Resources\Views\ProductsIndex.de.resx" />
+    <EmbeddedResource Remove="Resources\Views\Products\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Products\Products.de.resx" />
-    <EmbeddedResource Remove="Resources\Views\Products\Products.en.resx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +29,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\Pages\Home\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,10 +48,26 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Resources\Views\Article\Index.de.resx" />
-    <None Include="Resources\Views\Products\Products.en.resx">
+    <None Include="Resources\Pages\Products\Index.en.resx">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Views\Products\Products.de.resx" />
+    <None Include="Resources\Pages\Products\Index.de.resx" />
+    <None Include="Resources\Views\Products.de.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Views\ProductsIndex.de.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Views\Products\Products.de.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Views\Products\Index.en.resx">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Pages\Home\" />
   </ItemGroup>
 
 </Project>
