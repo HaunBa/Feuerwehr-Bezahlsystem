@@ -1,6 +1,8 @@
-﻿@using ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using ViewModels
 @model List<ArticleWithPriceVM>
 
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Products";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -11,13 +13,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10">
-    <h1>All Products</h1>
+    <h1>@_loc["All Products"]</h1>
     <br />
-    <h2>Drinks</h2>
+    <h2>@_loc["Drinks"]</h2>
     <hr />
     @if (!Model.Any(x => x.Type == "Drink"))
     {
-        <h3>Nothing left...</h3>    
+        <h3>@_loc["Nothing Left"]</h3>    
     }else{
         <div class="container">
             @for (int i = 0; i < drinks.Count; i+=3)
@@ -55,11 +57,11 @@
             </div>
         }
         <br />
-        <h2>Food</h2>
+        <h2>@_loc["Food"]</h2>
         <hr />
         @if (!Model.Any(x => x.Type == "Food"))
         {
-            <h3>Nothing left...</h3>    
+            <h3>@_loc["Nothing Left"]</h3>    
         }else
         {
             @foreach(var item in Model.Where(x => x.Type == "Food")){
@@ -99,12 +101,12 @@
             }        
         }
         <br />
-        <h2>Else</h2>
+        <h2>@_loc["Else"]</h2>
         <hr />
 
         @if (!Model.Any(x => x.Type == "Else"))
         {
-            <h3>Nothing left...</h3>    
+            <h3>@_loc["Nothing Left"]</h3>    
         }else
         {
             @foreach(var item in Model.Where(x => x.Type == "Else")){
@@ -130,11 +132,11 @@
             <div class="container" style="position: fixed; right: 0; width: 30%">
                 <table class="table table-striped" style="position: sticky">
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Sub Total</th>
-                        <th>Action</th>
+                        <th>@_loc["Name"]</th>
+                        <th>@_loc["Price"]</th>
+                        <th>@_loc["Name"]</th>
+                        <th>@_loc["Sub Total"]</th>
+                        <th>@_loc["Action"]</th>
                     </tr>
                     @if (ViewBag.cart != null)
                     {
@@ -145,18 +147,18 @@
                                 <td>@item.PriceAmount</td>
                                 <td>@item.Amount</td>
                                 <td>@(item.PriceAmount * item.Amount)</td>                        
-                                <td><a asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">Remove</a></td>
+                                <td><a asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">@_loc["Remove"]</a></td>
                             </tr>
                         }
                     }
                     <tr>
-                        <td>Sum</td>
+                        <td>@_loc["Sum"]</td>
                         <td>
                             @ViewBag.total
                         </td>
                     </tr>
                     <tr>
-                        <a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">Buy</a>
+                        <a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a>
                     </tr>
                 </table>
             </div>
