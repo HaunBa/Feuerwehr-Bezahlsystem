@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Resources\Controllers\ProductsController.de.resx" />
+    <EmbeddedResource Remove="Resources\Controllers\ProductsController.en.resx" />
     <EmbeddedResource Remove="Resources\Pages\Products\Index.de.resx" />
     <EmbeddedResource Remove="Resources\Pages\Products\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Article\Create.de.resx" />
@@ -18,11 +20,14 @@
     <EmbeddedResource Remove="Resources\Views\Article\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Products.de.resx" />
     <EmbeddedResource Remove="Resources\Views\ProductsIndex.de.resx" />
-    <EmbeddedResource Remove="Resources\Views\Products\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Products\Products.de.resx" />
+    <EmbeddedResource Remove="Resources\Views\Products\Products.en.resx" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
@@ -32,6 +37,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Resources\Controllers\ProductsController.de.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Controllers\ProductsController.en.resx">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Views\Article\Edit.de.resx">
       <SubType>Designer</SubType>
     </None>
@@ -61,7 +72,7 @@
     <None Include="Resources\Views\Products\Products.de.resx">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Views\Products\Index.en.resx">
+    <None Include="Resources\Views\Products\Products.en.resx">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

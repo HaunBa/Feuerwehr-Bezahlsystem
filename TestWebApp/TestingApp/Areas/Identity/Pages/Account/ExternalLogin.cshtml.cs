@@ -83,6 +83,8 @@ namespace TestingApp.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+            public string Username { get; set; }
+
             [EmailAddress]
             public string Email { get; set; }
         }
@@ -128,11 +130,11 @@ namespace TestingApp.Areas.Identity.Pages.Account
                 // If the user does not have an account, then ask the user to create an account.
                 ReturnUrl = returnUrl;
                 ProviderDisplayName = info.ProviderDisplayName;
-                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
+                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Username = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
                     };
                 }
                 return Page();
@@ -154,8 +156,7 @@ namespace TestingApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

@@ -8,6 +8,8 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 
     var drinks = Model.Where(x => x.Type == "Drink").ToList();
+    var food = Model.Where(x => x.Type == "Food").ToList();
+    var stuff = Model.Where(x => x.Type == "Else").ToList();
 }
 
 <div class="container">
@@ -55,76 +57,94 @@
                 </div>
             } 
             </div>
-        }
+        
         <br />
         <h2>@_loc["Food"]</h2>
         <hr />
-        @if (!Model.Any(x => x.Type == "Food"))
+        @if (!food.Any())
         {
             <h3>@_loc["Nothing Left"]</h3>    
         }else
         {
-            @foreach(var item in Model.Where(x => x.Type == "Food")){
-                @if (item.Amount == 0)
-                {
-                    <div class="card" disabled style="width: 18rem;">
-                        <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-                        <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">
-                            <div>
-                                <strong>Price:</strong> @item.PriceAmount €
+            <div class="container">
+            @for (int i = 0; i < food.Count; i+=3)
+            {
+                <div class="row gy-5" style="margin-top: 20px">
+                    @for (int x = i; x < i+3 && x < food.Count; x++)
+                    {
+                        <div class="col">
+                            <a asp-action="Buy" asp-route-id="@food[x].Id" style="color: black; text-decoration:none">
+                                <div class="card" style="width: 18rem;">
+                              <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(food[x].ImageData))" alt="@food[x].Name">
+                                  <div class="card-body">
+                                    <h5 class="card-title">@food[x].Name</h5>
+                                        <p class="card-text">
+                                            <div>
+                                                <strong>Price:</strong> @food[x].PriceAmount €
+                                            </div>
+                                            <div>
+                                                <strong>Amount Left:</strong> @food[x].Amount
+                                            </div>
+                                        </p>
+                                  </div>
                             </div>
-                            <div>
-                                <strong>Amount Left:</strong> @item.Amount
-                            </div>
-                        </p>
+                            </a>
                         </div>
-                    </div>
-                }else
-                {
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-                        <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">
-                            <div>
-                                <strong>Price:</strong> @item.PriceAmount €
+                        @if (food.Last().Equals(food[x]))
+                        {
+                            <div class="col">
+                                <!-- Empty Col for displaying the cards fittingly-->
                             </div>
-                            <div>
-                                <strong>Amount Left:</strong> @item.Amount
-                            </div>
-                        </p>
-                        </div>
-                    </div>
-                }
+                        }
+                    }
+                </div>
+            } 
+            </div>
             }        
         }
         <br />
         <h2>@_loc["Else"]</h2>
         <hr />
 
-        @if (!Model.Any(x => x.Type == "Else"))
+        @if (!stuff.Any())
         {
             <h3>@_loc["Nothing Left"]</h3>    
         }else
         {
-            @foreach(var item in Model.Where(x => x.Type == "Else")){
-                <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="@item.ImageData" alt="@item.Name">
-                  <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">
-                        <div>
-                            <strong>Price:</strong> @item.PriceAmount €
+            <div class="container">
+            @for (int i = 0; i < stuff.Count; i+=3)
+            {
+                <div class="row gy-5" style="margin-top: 20px">
+                    @for (int x = i; x < i+3 && x < stuff.Count; x++)
+                    {
+                        <div class="col">
+                            <a asp-action="Buy" asp-route-id="@stuff[x].Id" style="color: black; text-decoration:none">
+                                <div class="card" style="width: 18rem;">
+                              <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(stuff[x].ImageData))" alt="@stuff[x].Name">
+                                  <div class="card-body">
+                                    <h5 class="card-title">@stuff[x].Name</h5>
+                                        <p class="card-text">
+                                            <div>
+                                                <strong>Price:</strong> @stuff[x].PriceAmount €
+                                            </div>
+                                            <div>
+                                                <strong>Amount Left:</strong> @stuff[x].Amount
+                                            </div>
+                                        </p>
+                                  </div>
+                            </div>
+                            </a>
                         </div>
-                        <div>
-                            <strong>Amount Left:</strong> @item.Amount
-                        </div>
-                    </p>
-                  </div>
+                        @if (stuff.Last().Equals(stuff[x]))
+                        {
+                            <div class="col">
+                                <!-- Empty Col for displaying the cards fittingly-->
+                            </div>
+                        }
+                    }
                 </div>
-            }        
+            } 
+            </div> 
         }
         </div>
         <!-- Cart -->

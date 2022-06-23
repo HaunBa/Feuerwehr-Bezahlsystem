@@ -1,5 +1,7 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
 @model IndexModel
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -25,7 +27,21 @@
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <br />
+            <div>
+                <h3>@_loc["Offene Kasse"]</h3>
+                <div class="form-group">
+                    <label asp-for="Input.OpenCheckoutDate"></label>
+                    <input asp-for="Input.OpenCheckoutDate" class="form-control" />
+                    <span asp-validation-for="Input.OpenCheckoutDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.OpenCheckOutValue"></label>
+                    <input asp-for="Input.OpenCheckOutValue" class="form-control" />
+                    <span asp-validation-for="Input.OpenCheckOutValue" class="text-danger"></span>
+                </div>
+            </div>
+            <button style="margin-top: 20px" id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>
 </div>

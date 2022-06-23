@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.EntityFrameworkCore
 @using TestingApp.Data
 @inject ApplicationDbContext _context
 @model TestingApp.Areas.Identity.Pages.Account.Manage.PurchasesModel
@@ -7,7 +8,9 @@
     ViewData["ActivePage"] = ManageNavPages.Purchases;
 
     var user = _context.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-    var payments = _context.Payments.Where(x => x.PersonId == user.Id).OrderByDescending(x => x.Date);
+    var payments = _context.Payments.Include(x => x.Articles).Where(x => x.PersonId == user.Id).OrderByDescending(x => x.Date);
+
+    var topups = _context.TopUps.Include(x => x.Executor).Where(x => x.PersonId == user.Id).OrderByDescending(x => x.Date);
 }
 
 <style>
@@ -43,7 +46,7 @@ width: 100%;
             <td>@payment.PaymentId</td>
             <td>@payment.Date</td>
             <td>@payment.Description</td>
-            <td>@payment.CashAmount</td>
+            <td>@payment.CashAmount €</td>
             <td>@payment.Articles.Count</td>
             <td>
                 <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
@@ -55,7 +58,33 @@ width: 100%;
 
 
 <h3>Top-Ups</h3>
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Payment Id</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Cash Amount</th>
+            <th>Executor</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody style="height:auto">
+        @foreach (var payment in topups)
+        {
+        <tr>
+            <td>@payment.TopUpId</td>
+            <td>@payment.Date</td>
+            <td>@payment.Description</td>
+            <td>@payment.CashAmount €</td>
+            <td>@payment.Executor.UserName</td>
+            <td>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-paymentId="@payment.TopUpId">Details</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 
 
 <a class="btn btn-warning" onclick="history.go(-1)">Go Back</a>

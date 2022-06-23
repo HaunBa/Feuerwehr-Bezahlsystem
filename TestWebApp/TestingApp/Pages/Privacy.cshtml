@@ -1,8 +1,13 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
 @model PrivacyModel
+@inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = @_loc["Title"];
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>@_loc["Subtext"]</p>
+
+
+<img src="~/img/Datenschutz.jpg" width="800px"/>

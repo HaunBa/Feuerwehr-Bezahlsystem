@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TestingApp.Data;
 
 namespace TestingApp.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +17,16 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         /// <summary>
@@ -49,6 +53,8 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+
         public class InputModel
         {
             [Display(Name = "First Name")]
@@ -58,12 +64,24 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            [DataType(DataType.Date)]
+            [Display(Name = "Datum der offenen Kasse")]
+            public DateTime OpenCheckoutDate { get; set; }
+            [Display(Name = "Maximal Betrag bei Offener Kasse (0 für unbegrenzt)")]
+            public double OpenCheckOutValue { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var openCheckoutDate = user.OpenCheckoutDate;
+            if (openCheckoutDate.ToString() == "01.01.0001 00:00:00")
+            {
+                openCheckoutDate = DateTime.Now;
+            }
+
+            var openCheckoutValue = user.OpenCheckoutValue;
             var firstName = user.FirstName;
             var lastName = user.LastName;
             Username = userName;
@@ -71,7 +89,9 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
+                OpenCheckoutDate = openCheckoutDate,
+                OpenCheckOutValue = openCheckoutValue
             };
         }
 
@@ -115,6 +135,10 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
 
             var firstName = user.FirstName;
             var lastName = user.LastName;
+            var openCheckoutDate = user.OpenCheckoutDate;
+            var openCheckoutValue = user.OpenCheckoutValue;
+
+
             if (Input.FirstName != firstName)
             {
                 user.FirstName = Input.FirstName;
@@ -123,6 +147,18 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
             if (Input.LastName != lastName)
             {
                 user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.OpenCheckoutDate != openCheckoutDate)
+            {
+                user.OpenCheckoutDate = Input.OpenCheckoutDate;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.OpenCheckOutValue != openCheckoutValue)
+            {
+                user.OpenCheckoutValue = Input.OpenCheckOutValue;
                 await _userManager.UpdateAsync(user);
             }
 
