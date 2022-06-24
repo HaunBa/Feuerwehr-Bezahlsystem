@@ -21,34 +21,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
         .AddDefaultUI()
         .AddDefaultTokenProviders();
 
-/*
-builder.Services.AddAuthentication()
-   .AddGoogle(options =>
-   {
-       IConfigurationSection section =
-       config.GetSection("Authentication:Google");
-       options.ClientId = section["ClientId"];
-       options.ClientSecret = section["ClientSecret"];
-   })
-   .AddFacebook(options =>
-   {
-       IConfigurationSection FBAuthNSection =
-       config.GetSection("Authentication:FB");
-       options.ClientId = FBAuthNSection["ClientId"];
-       options.ClientSecret = FBAuthNSection["ClientSecret"];
-   })
-   .AddMicrosoftAccount(microsoftOptions =>
-   {
-       microsoftOptions.ClientId = config["Authentication:Microsoft:ClientId"];
-       microsoftOptions.ClientSecret = config["Authentication:Microsoft:ClientSecret"];
-   })
-   .AddTwitter(twitterOptions =>
-   {
-       twitterOptions.ConsumerKey = config["Authentication:Twitter:ConsumerAPIKey"];
-       twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
-       twitterOptions.RetrieveUserDetails = true;
-   });
- */
+// External Logins
 
 var config = builder.Configuration;
 
@@ -59,22 +32,22 @@ builder.Services.AddAuthentication()
                     config.GetSection("Authentication:Google");
                     opts.ClientId = section["ClientId"];
                     opts.ClientSecret = section["ClientSecret"];
-                })
+                });
                 //.AddMicrosoftAccount(opts =>
                 //{
                 //    IConfigurationSection section =
                 //    config.GetSection("Authentication:Microsoft");
                 //    opts.ClientId = section["ClientId"];
                 //    opts.ClientSecret = section["ClientSecret"];
-                //})
-                .AddFacebook(opts =>
-                {
-                    IConfigurationSection section =
-                    config.GetSection("Authentication:Facebook");
-                    opts.ClientId = section["ClientId"];
-                    opts.ClientSecret = section["ClientSecret"];
-                    opts.AccessDeniedPath = "/AccessDenied";
-                });
+                ////})
+                //.AddFacebook(opts =>
+                //{
+                //    IConfigurationSection section =
+                //    config.GetSection("Authentication:Facebook");
+                //    opts.ClientId = section["ClientId"];
+                //    opts.ClientSecret = section["ClientSecret"];
+                //    opts.AccessDeniedPath = "/AccessDenied";
+                //});
 
 builder.Services.AddLocalization(options =>
 {
@@ -97,9 +70,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedCultures = cultures;
     options.FallBackToParentUICultures = true;
 
-    options
+    options.RequestCultureProviders.Remove(options
     .RequestCultureProviders
-    .Clear();
+    .First(x => x.GetType() == typeof(AcceptLanguageHeaderRequestCultureProvider)));
 });
 
 builder.Services
