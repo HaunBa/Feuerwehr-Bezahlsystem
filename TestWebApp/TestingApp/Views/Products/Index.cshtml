@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using static Extensions
 @using ViewModels
 @model List<ArticleWithPriceVM>
 
@@ -7,9 +8,9 @@
     ViewData["Title"] = "Products";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 
-    var drinks = Model.Where(x => x.Type == "Drink").ToList();
-    var food = Model.Where(x => x.Type == "Food").ToList();
-    var stuff = Model.Where(x => x.Type == "Else").ToList();
+    var drinks = Model.Where(x => x.Type == ArtType.Drink).ToList();
+    var food = Model.Where(x => x.Type == ArtType.Food).ToList();
+    var stuff = Model.Where(x => x.Type == ArtType.Else).ToList();
 }
 
 <div class="container">
@@ -19,7 +20,7 @@
     <br />
     <h2>@_loc["Drinks"]</h2>
     <hr />
-    @if (!Model.Any(x => x.Type == "Drink"))
+    @if (!Model.Any(x => x.Type == ArtType.Drink))
     {
         <h3>@_loc["Nothing Left"]</h3>    
     }else{
@@ -168,17 +169,17 @@
                                 <td>@item.Amount</td>
                                 <td>@(item.PriceAmount * item.Amount)</td>                        
                                 <td><a asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">@_loc["Remove"]</a></td>
-                            </tr>
-                            <tr>
-                                <td>@_loc["Sum"]</td>
-                                <td>
-                                    @ViewBag.total
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a></td>
-                            </tr>
+                            </tr>                            
                         }
+                        <tr>
+                            <td>@_loc["Sum"]</td>
+                            <td>
+                                @ViewBag.total
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a></td>
+                        </tr>
                     }
                     
                 </table>

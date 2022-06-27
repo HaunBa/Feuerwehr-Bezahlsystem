@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static TestingApp.Extensions;
 
 namespace TestingApp.ViewModels
 {
@@ -12,7 +13,7 @@ namespace TestingApp.ViewModels
         [Display(Name = "Article Image")]
         public byte[] ImageData { get; set; }
         [Display(Name = "Article type")]
-        public string Type { get; set; }
+        public ArtType Type { get; set; }
 
         public int PriceId { get; set; }
         public DateTime Since { get; set; }

@@ -2,6 +2,13 @@
 {
     public static class Extensions
     {
+        public enum ArtType
+        {
+            Food = 0,
+            Drink = 1,
+            Else = 2
+        }
+
         public enum Roles
         {
             SuperAdmin,

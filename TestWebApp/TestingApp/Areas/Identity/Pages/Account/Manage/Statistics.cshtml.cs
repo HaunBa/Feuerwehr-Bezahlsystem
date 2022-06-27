@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TestingApp.Data;
 using TestingApp.ViewModels;
+using static TestingApp.Extensions;
 
 namespace TestingApp.Areas.Identity.Pages.Account.Manage
 {
@@ -91,7 +92,7 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
             return tmpArticles;
         }
 
-        public Dictionary<string, int> GetJsonByType(string type)
+        public Dictionary<string, int> GetJsonByType(ArtType type)
         {
             Dictionary<string, int> articles = new();
 
@@ -122,7 +123,7 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
 
         public void OnGet()
         {
-            var res = GetJsonByType("Drink");  //get the data
+            var res = GetJsonByType(ArtType.Drink);  //get the data
 
             var articlePercentage = GetJsonPercentage();
 
