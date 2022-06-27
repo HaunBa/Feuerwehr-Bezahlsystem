@@ -148,6 +148,6 @@
     <value>Hallo {0} !</value>
   </data>
   <data name="UsersNav" xml:space="preserve">
-    <value>Users</value>
+    <value>Benutzer</value>
   </data>
 </root>

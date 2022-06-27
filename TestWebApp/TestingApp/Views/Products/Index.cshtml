@@ -33,19 +33,19 @@
                         <div class="col">
                             <a asp-action="Buy" asp-route-id="@drinks[x].Id" style="color: black; text-decoration:none">
                                 <div class="card" style="width: 18rem;">
-                              <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
-                                  <div class="card-body">
-                                    <h5 class="card-title">@drinks[x].Name</h5>
-                                        <p class="card-text">
-                                            <div>
-                                                <strong>@_loc["Price"]</strong> @drinks[x].PriceAmount €
-                                            </div>
-                                            <div>
-                                                <strong>@_loc["Amount Left"]</strong> @drinks[x].Amount
-                                            </div>
-                                        </p>
-                                  </div>
-                            </div>
+                                  <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
+                                      <div class="card-body">
+                                        <h5 class="card-title">@drinks[x].Name</h5>
+                                            <p class="card-text">
+                                                <div>
+                                                    <strong>@_loc["Price"]</strong> @drinks[x].PriceAmount €
+                                                </div>
+                                                <div>
+                                                    <strong>@_loc["Amount Left"]</strong> @drinks[x].Amount
+                                                </div>
+                                            </p>
+                                      </div>
+                                </div>
                             </a>
                         </div>
                         @if (drinks.Last().Equals(drinks[x]))

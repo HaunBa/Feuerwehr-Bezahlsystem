@@ -5,38 +5,40 @@
 
 @inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Article";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>@_loc["AllArticles"]</h1>
-<a asp-action="Create">@_loc["Create New"]</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@_loc["Name"]</th>
-            <th>@_loc["Price"]</th>
-            <th>@_loc["Amount"]</th>
-            <th>@_loc["Price Since"]</th>
-            <th>@_loc["Price Until"]</th>
-            <th>@_loc["Action"]</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var art in Model)
-        {
-        <tr>
-            <td>@art.Name</td>
-            <td>@art.PriceAmount €</td>
-            <td>@art.Amount</td>
-            <td>@art.Since</td>
-            <td>@art.Until</td>
-            <td>
-                <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Edit Article"]</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <h1>@_loc["AllArticles"]</h1>
+        <a asp-action="Create">@_loc["Create New"]</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@_loc["Name"]</th>
+                    <th>@_loc["Price"]</th>
+                    <th>@_loc["Amount"]</th>
+                    <th>@_loc["Price Since"]</th>
+                    <th>@_loc["Price Until"]</th>
+                    <th>@_loc["Action"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var art in Model)
+                {
+                <tr>
+                    <td>@art.Name</td>
+                    <td>@art.PriceAmount €</td>
+                    <td>@art.Amount</td>
+                    <td>@art.Since</td>
+                    <td>@art.Until</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Edit Article"]</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
 
-<a class="btn btn-warning" onclick="history.go(-1)">@_loc["Go Back To Last Page"]</a>
+        <a class="btn btn-warning" onclick="history.go(-1)">@_loc["Go Back To Last Page"]</a>
+</div>
