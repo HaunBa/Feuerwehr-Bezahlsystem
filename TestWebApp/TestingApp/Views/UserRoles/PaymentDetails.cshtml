@@ -1,12 +1,13 @@
-﻿@using ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using ViewModels
 @model PaymentVM
-
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>@("Payment " + Model.PaymentId + " Details")</h1>
+<h1>@(_loc["Bezahlung "].Value + Model.PaymentId + _loc[" Details"].Value)</h1>
 
  <dl class="row">
     <dt class="col-sm-2">
@@ -33,9 +34,10 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Article Id</th>
-            <th>Name</th>
-            <th>Price Amount</th>
+            <th>@_loc["Artikel Id"]</th>
+            <th>@_loc["Name"]</th>
+            <th>@_loc["Artikel Preis"]</th>
+            <th>@_loc["Anzahl"]</th>
         </tr>
     </thead>
     <tbody>
@@ -45,8 +47,9 @@
             <td>@art.Id</td>
             <td>@art.Name</td>
             <td>@art.Price.Amount</td>
+            <td>@art.Amount</td>
         </tr>
         }
     </tbody>
 </table>
-<a class="btn btn-warning" onclick="history.go(-1)">Go Back</a>
+<a class="btn btn-warning" onclick="history.go(-1)">@_loc["Zurück"]</a>

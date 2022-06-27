@@ -1,9 +1,19 @@
 ﻿@using ViewModels
+@using static TestingApp.Extensions
+
 @model ArticleWithPriceVM
 
 @{
     ViewData["Title"] = "Create Article";
     Layout = "~/Pages/Shared/_Layout.cshtml";
+    var list = new List<string>();
+    
+
+    foreach (string item in Enum.GetValues(typeof(ArtType)))
+    {
+        list.Add(item);
+    }
+    var modelType = list.FirstOrDefault(x => x == Model.Type.ToString());
 }
 
 
@@ -28,9 +38,14 @@
                 <span asp-validation-for="PriceAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label><br />
-                <input asp-for="Type" class="control-label" />
-                <span asp-validation-for="Type" class="text-danger"></span>
+                <select asp-for="Type" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="@modelType">@modelType</option>
+
+                    @foreach (var item in list.Where(x => x != modelType))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ImageData" style="width: 100%;"></label>
