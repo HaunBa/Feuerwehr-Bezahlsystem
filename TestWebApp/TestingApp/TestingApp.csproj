@@ -20,8 +20,7 @@
     <EmbeddedResource Remove="Resources\Views\Article\Index.en.resx" />
     <EmbeddedResource Remove="Resources\Views\Index.de.resx" />
     <EmbeddedResource Remove="Resources\Views\Products.de.resx" />
-    <EmbeddedResource Remove="Resources\Views\Products\Products.de.resx" />
-    <EmbeddedResource Remove="Resources\Views\Products\Products.en.resx" />
+    <EmbeddedResource Remove="Resources\Views\Products\Index.en.resx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,13 +65,10 @@
     <None Include="Resources\Views\Products.de.resx">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\Views\Products\Index.en.resx">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Views\Products\Index.de.resx">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\Views\Products\Products.de.resx">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\Views\Products\Products.en.resx">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

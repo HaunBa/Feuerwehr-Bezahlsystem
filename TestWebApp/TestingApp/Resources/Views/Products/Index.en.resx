@@ -117,28 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Amount" xml:space="preserve">
-    <value>Anzahl</value>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
   </data>
-  <data name="Article Image" xml:space="preserve">
-    <value>Artikel Bild</value>
+  <data name="AllProducts" xml:space="preserve">
+    <value>All Products</value>
   </data>
-  <data name="Article Type" xml:space="preserve">
-    <value>Artikel Typ</value>
+  <data name="Amount Left" xml:space="preserve">
+    <value>Amount Left:</value>
   </data>
-  <data name="Delete Article" xml:space="preserve">
-    <value>Artikel Löschen</value>
+  <data name="Buy" xml:space="preserve">
+    <value>Buy</value>
   </data>
-  <data name="Go Back To Last Page" xml:space="preserve">
-    <value>Zurück zur letzten Seite</value>
+  <data name="Drinks" xml:space="preserve">
+    <value>Drinks</value>
+  </data>
+  <data name="Else" xml:space="preserve">
+    <value>Else</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>Food</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Price Amount" xml:space="preserve">
-    <value>Preis</value>
+  <data name="Nothing Left" xml:space="preserve">
+    <value>Nothing Left...</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="Sub Total" xml:space="preserve">
+    <value>Sub Total</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

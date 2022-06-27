@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using TestingApp.ViewModels
+
 @model IEnumerable<ArticleWithPriceVM>
 
 @inject IViewLocalizer _loc
@@ -8,7 +9,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>@_loc["All Articles"]</h1>
+<h1>@_loc["AllArticles"]</h1>
 <a asp-action="Create">@_loc["Create New"]</a>
 <table class="table table-striped">
     <thead>
