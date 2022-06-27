@@ -123,6 +123,9 @@
   <data name="AllProducts" xml:space="preserve">
     <value>Alle Produkte</value>
   </data>
+  <data name="Amount Left" xml:space="preserve">
+    <value>Vorhanden:</value>
+  </data>
   <data name="Buy" xml:space="preserve">
     <value>Bezahlen</value>
   </data>

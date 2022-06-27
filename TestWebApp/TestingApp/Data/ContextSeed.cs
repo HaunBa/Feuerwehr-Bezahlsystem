@@ -113,7 +113,7 @@ namespace TestingApp.Data
                 context.Articles.Add(elseArt);
 
                 var res = await context.SaveChangesAsync();
-                Console.WriteLine($"Total added Articles: {res}");
+                Console.WriteLine($"--- Total added Articles: {res}");
             }
         }
     }

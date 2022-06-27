@@ -1,21 +1,24 @@
-﻿@using TestingApp.ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TestingApp.ViewModels
 @model IEnumerable<ArticleWithPriceVM>
+
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>All Articles</h1>
-<a asp-action="Create">Create New</a>
+<h1>@_loc["All Articles"]</h1>
+<a asp-action="Create">@_loc["Create New"]</a>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <th>Price Since</th>
-            <th>Price Until</th>
-            <th>Action</th>
+            <th>@_loc["Name"]</th>
+            <th>@_loc["Price"]</th>
+            <th>@_loc["Amount"]</th>
+            <th>@_loc["Price Since"]</th>
+            <th>@_loc["Price Until"]</th>
+            <th>@_loc["Action"]</th>
         </tr>
     </thead>
     <tbody>
@@ -28,11 +31,11 @@
             <td>@art.Since</td>
             <td>@art.Until</td>
             <td>
-                <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">Edit Article</a>
+                <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Edit Article"]</a>
             </td>
         </tr>
         }
     </tbody>
 </table>
 
-<a class="btn btn-warning" onclick="history.go(-1)">Go Back To Last Page</a>
+<a class="btn btn-warning" onclick="history.go(-1)">@_loc["Go Back To Last Page"]</a>
