@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{0758A156-7229-423E-B835-88DA8EC6710F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingApp", "TestingApp\TestingApp.csproj", "{8C0E7A13-B15D-448F-9141-1E2C1473ECDE}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0758A156-7229-423E-B835-88DA8EC6710F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0758A156-7229-423E-B835-88DA8EC6710F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0758A156-7229-423E-B835-88DA8EC6710F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0758A156-7229-423E-B835-88DA8EC6710F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C0E7A13-B15D-448F-9141-1E2C1473ECDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C0E7A13-B15D-448F-9141-1E2C1473ECDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C0E7A13-B15D-448F-9141-1E2C1473ECDE}.Release|Any CPU.ActiveCfg = Release|Any CPU

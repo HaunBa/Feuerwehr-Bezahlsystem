@@ -29,9 +29,9 @@ namespace TestingApp.Data
                 PhoneNumberConfirmed = true
             };
 
-            if (userManager.Users.All(u => u.Id != defaultUser.Id))
+            if (await userManager.FindByNameAsync("superadmin") == null)
             {
-                var user = await userManager.FindByEmailAsync(defaultUser.Email);
+                var user = await userManager.FindByNameAsync(defaultUser.UserName);
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "Admin123!");
@@ -114,6 +114,27 @@ namespace TestingApp.Data
 
                 var res = await context.SaveChangesAsync();
                 Console.WriteLine($"--- Total added Articles: {res}");
+            }
+        }
+
+        public static async Task SeedBasicUserAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            if (await userManager.FindByNameAsync("basicUser") ! == null)
+            {
+                //Seed Default User
+                var defaultUser = new ApplicationUser
+                {
+                    UserName = "basicUser",
+                    Email = "basicUser@gmail.com",
+                    FirstName = "basicUser",
+                    LastName = "basicUser",
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true
+                };
+
+                await userManager.CreateAsync(defaultUser, "Admin123!");
+
+                await userManager.AddToRoleAsync(defaultUser, "User");
             }
         }
     }

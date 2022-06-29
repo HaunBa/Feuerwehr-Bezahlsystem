@@ -78,33 +78,74 @@ namespace TestingApp.Controllers
                                     Type = art.Type
                                 }).ToList();
 
-                var currentDate = DateTime.Now;
-                var sum = articles.Sum(x => x.Amount * _context.Prices.First(y => y.PriceId == x.PriceId).Amount);
-                var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-                currentUser.Balance -= sum;
-
-                var payment = new Payment()
+                var tmp = _userManager.Users.Where(x => x.OpenCheckoutDate != DateTime.MinValue).ToList();
+                var ocu = tmp.FirstOrDefault(x => DateOnly.FromDateTime(x.OpenCheckoutDate) == DateOnly.FromDateTime(DateTime.Now));
+                
+                if (ocu != null)
                 {
-                    Articles = articles,
-                    CashAmount = sum,
-                    Date = currentDate,
-                    Description = $"Payment on {currentDate} over {sum} €",
-                    Person = currentUser,
-                    PersonId = currentUser.Id
-                };
+                    // OPEN CHECKOUT
+                    var currentDate = DateTime.Now;
+                    var sum = articles.Sum(x => x.Amount * _context.Prices.First(y => y.PriceId == x.PriceId).Amount);
+                    var currentUser = ocu;
+                    currentUser.Balance -= sum;
 
-                currentUser.Payments.Add(payment);
-
-                await _context.SaveChangesAsync();
-
-                foreach (var item in articles)
-                {
-                    var foundArt = await _context.Articles.FirstOrDefaultAsync(x => x.Id == item.Id);
-                    if (foundArt != null && foundArt.Amount >= item.Amount)
+                    var payment = new Payment()
                     {
-                        foundArt.Amount -= item.Amount;
+                        Articles = articles,
+                        CashAmount = sum,
+                        Date = currentDate,
+                        Description = $"Payment on {currentDate} over {sum} €",
+                        Person = currentUser,
+                        PersonId = currentUser.Id
+                    };
 
-                        _context.Articles.Update(foundArt);
+                    currentUser.Payments.Add(payment);
+
+                    await _context.SaveChangesAsync();
+
+                    foreach (var item in articles)
+                    {
+                        var foundArt = await _context.Articles.FirstOrDefaultAsync(x => x.Id == item.Id);
+                        if (foundArt != null && foundArt.Amount >= item.Amount)
+                        {
+                            foundArt.Amount -= item.Amount;
+
+                            _context.Articles.Update(foundArt);
+                        }
+                    }
+                }
+                else
+                {
+                    // Normal Checkout
+
+                    var currentDate = DateTime.Now;
+                    var sum = articles.Sum(x => x.Amount * _context.Prices.First(y => y.PriceId == x.PriceId).Amount);
+                    var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                    currentUser.Balance -= sum;
+
+                    var payment = new Payment()
+                    {
+                        Articles = articles,
+                        CashAmount = sum,
+                        Date = currentDate,
+                        Description = $"Payment on {currentDate} over {sum} €",
+                        Person = currentUser,
+                        PersonId = currentUser.Id
+                    };
+
+                    currentUser.Payments.Add(payment);
+
+                    await _context.SaveChangesAsync();
+
+                    foreach (var item in articles)
+                    {
+                        var foundArt = await _context.Articles.FirstOrDefaultAsync(x => x.Id == item.Id);
+                        if (foundArt != null && foundArt.Amount >= item.Amount)
+                        {
+                            foundArt.Amount -= item.Amount;
+
+                            _context.Articles.Update(foundArt);
+                        }
                     }
                 }
 
@@ -134,23 +175,27 @@ namespace TestingApp.Controllers
                                                           Type = article.Type
                                                       }).FirstOrDefaultAsync(x => x.Id == id);
 
+            var newArt = new ArticleWithPriceVM
+            {
+                Amount = 1,
+                PriceAmount = productModel.PriceAmount,
+                Id = productModel.Id,
+                ImageData = productModel.ImageData,
+                Name = productModel.Name,
+                PriceId = productModel.PriceId,
+                Since = productModel.Since,
+                Type = productModel.Type,
+                Until = productModel.Until
+            };
+
             if (SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart") == null)
             {
                 List<ArticleWithPriceVM> cart = new List<ArticleWithPriceVM>();
-                cart.Add(new ArticleWithPriceVM
-                {
-                    Amount = 1,
-                    PriceAmount = productModel.PriceAmount,
-                    Id = productModel.Id,
-                    ImageData = productModel.ImageData,
-                    Name = productModel.Name,
-                    PriceId = productModel.PriceId,
-                    Since = productModel.Since,
-                    Type = productModel.Type,
-                    Until = productModel.Until
-                });
+
+                cart.Add(newArt);
 
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+
             }
             else
             {
@@ -162,22 +207,11 @@ namespace TestingApp.Controllers
                 }
                 else
                 {
-                    cart.Add(new ArticleWithPriceVM
-                    {
-                        Amount = 1,
-                        PriceAmount = productModel.PriceAmount,
-                        Id = productModel.Id,
-                        ImageData = productModel.ImageData,
-                        Name = productModel.Name,
-                        PriceId = productModel.PriceId,
-                        Since = productModel.Since,
-                        Type = productModel.Type,
-                        Until = productModel.Until
-                    });
+                    cart.Add(newArt);
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
-            return RedirectToAction(nameof(Index));
+            return Redirect($"~/Products#{newArt.Name}");
         }
 
         private int doesExist(int id)
