@@ -21,19 +21,19 @@ namespace TestingApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var articles = await (from article in _context.Articles.Include(x => x.Price)
-                                            select new ArticleWithPriceVM
-                                            {
-                                                Amount = article.Amount,
-                                                PriceAmount = article.Price.Amount,
-                                                Id = article.Id,
-                                                ImageData = article.ImageData,
-                                                Name = article.Name,
-                                                PriceId = article.PriceId,
-                                                Since = article.Price.Since,
-                                                Until = article.Price.Until,
-                                                Type = article.Type
-                                            }).ToListAsync();
+            var articles = await    (from article in _context.Articles.Include(x => x.Price)
+                                    select new ArticleWithPriceVM
+                                    {
+                                        Amount = article.Amount,
+                                        PriceAmount = article.Price.Amount,
+                                        Id = article.Id,
+                                        ImageData = article.ImageData,
+                                        Name = article.Name,
+                                        PriceId = article.PriceId,
+                                        Since = article.Price.Since,
+                                        Until = article.Price.Until,
+                                        Type = article.Type
+                                    }).ToListAsync();
 
             var cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
