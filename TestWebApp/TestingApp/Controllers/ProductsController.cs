@@ -47,6 +47,12 @@ namespace TestingApp.Controllers
         {
             List<ArticleWithPriceVM> cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
             int index = doesExist(id);
+            var art = new ArticleWithPriceVM();
+
+            if (index >= 0)
+            {
+                art = cart[index];
+            }
 
             if (cart[index].Amount > 1)
             {
@@ -59,7 +65,14 @@ namespace TestingApp.Controllers
 
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
 
-            return RedirectToAction(nameof(Index));
+            if (index >= 0)
+            {
+                return Redirect($"~/Products#{art.Name}");
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
                 
         public async Task<IActionResult> Purchase()

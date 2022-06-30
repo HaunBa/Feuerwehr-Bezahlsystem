@@ -34,6 +34,7 @@ namespace TestingApp.Controllers
 
                 var thisViewModel = new UserRolesViewModel();
                 thisViewModel.Id = user.Id;
+                thisViewModel.Username = user.UserName;
                 thisViewModel.FirstName = user.FirstName;
                 thisViewModel.LastName = user.LastName;
                 thisViewModel.Role = role[0];
@@ -61,6 +62,7 @@ namespace TestingApp.Controllers
 
             var vm = new UserWithAllInfosVM();
             vm.Id = user.Id;
+            vm.Username = user.UserName;
             vm.FirstName = user.FirstName;
             vm.LastName = user.LastName;
             vm.Role = role[0];
@@ -121,6 +123,7 @@ namespace TestingApp.Controllers
 
             var thisViewModel = new UserRolesViewModel();
             thisViewModel.Id = user.Id;
+            thisViewModel.Username = user.UserName;
             thisViewModel.FirstName = user.FirstName;
             thisViewModel.LastName = user.LastName;
             thisViewModel.Role = role[0];
