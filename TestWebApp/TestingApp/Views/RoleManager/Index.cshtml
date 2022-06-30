@@ -1,15 +1,19 @@
-﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@inject IViewLocalizer _loc
+
 @{
     ViewData["Title"] = "Role Manager";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Role Manager</h1>
+<h1>@_loc["Rollen Manager"]</h1>
 <form method="post" asp-action="AddRole">
-    <div class="input-group" style="width:25%">
+    <div class="input-group" style="width:33%">
         <input type="text" name="roleName" class="form-control w-25">
         <span class="input-group-btn">
-            <input type="submit" name="submit" class="btn btn-primary" value="Add"/>
+            <input type="submit" name="submit" class="btn btn-primary" value="@_loc["Hinzufügen"]"/>
         </span>
     </div>
 </form>
@@ -18,9 +22,9 @@
     <thead>
         <tr>
 
-            <th>Id</th>
-            <th>Role</th>
-            <th>Action</th>
+            <th>@_loc["Id"]</th>
+            <th>@_loc["Rolle"]</th>
+            <th>@_loc["Aktion"]</th>
         </tr>
     </thead>
     <tbody>
@@ -29,8 +33,8 @@
             <tr>
                 <td>@role.Id</td>
                 <td>@role.Name</td>
-                <td><div class="col col-6" data-label="Options"><a asp-action="DeleteRole" asp-route-Id="@role.Id">Delete</a> |
-                <a asp-action="Edit" asp-route-id="@role.Id">Edit</a></div></td>
+                <td><div class="col col-6" data-label="Options"><a asp-action="DeleteRole" asp-route-Id="@role.Id">@_loc["Löschen"]</a> |
+                <a asp-action="Edit" asp-route-id="@role.Id">@_loc["Bearbeiten"]</a></div></td>
             </tr>
         }
     </tbody>

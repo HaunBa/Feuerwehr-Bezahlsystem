@@ -3,7 +3,7 @@
 @model IndexModel
 @inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = @_loc["Profil"];
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -41,7 +41,7 @@
                     <span asp-validation-for="Input.OpenCheckOutValue" class="text-danger"></span>
                 </div>
             </div>
-            <button style="margin-top: 20px" id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <button style="margin-top: 20px" id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">@_loc["Speichern"]</button>
         </form>
     </div>
 </div>

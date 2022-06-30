@@ -14,7 +14,7 @@
 @if (cultureItems.Count > 1)
 {
     <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
-    <form id="selectLanguage" 
+    @*<form id="selectLanguage" 
           asp-controller="Culture"
           asp-action="SetCulture" 
           asp-route-returnUrl="@returnUrl"
@@ -26,6 +26,6 @@
                 asp-for="@requestCulture.RequestCulture.UICulture.Name" 
                 asp-items="cultureItems">
         </select>
-    </form>
+    </form>*@
 </div>
 }

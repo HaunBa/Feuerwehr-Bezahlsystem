@@ -1,6 +1,10 @@
-﻿@using TestingApp.ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TestingApp.ViewModels
 @model UserRolesViewModel
 @inject RoleManager<IdentityRole> _roleManager
+
+@inject IViewLocalizer _loc
+
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -18,7 +22,7 @@
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
             <div class="form-group">
-                User Info
+                @_loc["Benutzer Information"]
             </div>
           </button>
         </h2>
@@ -45,7 +49,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            Balance
+            @_loc["Kontostand"]
           </button>
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
@@ -71,7 +75,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            Role
+            @_loc["Rolle"]
           </button>
         </h2>
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -87,8 +91,10 @@
         </div>
       </div>
     </div>
+    <br />
+
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-        <a class="btn btn-warning" onclick="history.go(-1)">Go Back To Last Page</a>
+        <input type="submit" value="@_loc["Speichern"]" class="btn btn-primary" />
+        <a class="btn btn-warning" onclick="history.go(-1)">@_loc["Zurück"]</a>
     </div>
 </form>

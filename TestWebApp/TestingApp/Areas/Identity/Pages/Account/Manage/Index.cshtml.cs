@@ -33,6 +33,7 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        [Display(Name = "Benutzername")]
         public string Username { get; set; }
 
         /// <summary>
@@ -57,12 +58,12 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Display(Name = "First Name")]
+            [Display(Name = "Vorname")]
             public string FirstName { get; set; }
-            [Display(Name = "Last Name")]
+            [Display(Name = "Nachname")]
             public string LastName { get; set; }
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Telefonnummer")]
             public string PhoneNumber { get; set; }
             [DataType(DataType.Date)]
             [Display(Name = "Datum der offenen Kasse")]

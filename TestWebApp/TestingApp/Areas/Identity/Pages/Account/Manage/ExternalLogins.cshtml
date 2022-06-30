@@ -1,5 +1,6 @@
 ﻿@page
 @model ExternalLoginsModel
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Manage your external logins";
     ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
@@ -8,7 +9,7 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 @if (Model.CurrentLogins?.Count > 0)
 {
-    <h3>Registered Logins</h3>
+    <h3>@_loc["Regestrierte Logins"]</h3>
     <table class="table">
         <tbody>
             @foreach (var login in Model.CurrentLogins)
@@ -22,7 +23,7 @@
                                 <div>
                                     <input asp-for="@login.LoginProvider" name="LoginProvider" type="hidden" />
                                     <input asp-for="@login.ProviderKey" name="ProviderKey" type="hidden" />
-                                    <button type="submit" class="btn btn-primary" title="Remove this @login.ProviderDisplayName login from your account">Remove</button>
+                                    <button type="submit" class="btn btn-primary" title="@_loc["Entferne diesen {0} login von deinem Account", login.ProviderDisplayName]">@_loc["Entfernen"]</button>
                                 </div>
                             </form>
                         }

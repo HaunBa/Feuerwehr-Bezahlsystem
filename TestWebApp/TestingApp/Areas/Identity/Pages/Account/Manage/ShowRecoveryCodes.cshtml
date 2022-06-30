@@ -1,7 +1,8 @@
 ﻿@page
 @model ShowRecoveryCodesModel
+@inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Recovery codes";
+    ViewData["Title"] = "Wiederherstellungscodes";
     ViewData["ActivePage"] = "TwoFactorAuthentication";
 }
 
@@ -9,10 +10,10 @@
 <h3>@ViewData["Title"]</h3>
 <div class="alert alert-warning" role="alert">
     <p>
-        <strong>Put these codes in a safe place.</strong>
+        @_loc["<strong>Speichere diese Codes an einem sicheren Ort.</strong>"]
     </p>
     <p>
-        If you lose your device and don't have the recovery codes you will lose access to your account.
+        @_loc["Wenn du dein Gerät verlierst und keinen Zugriff auf deine Wiederherstellungscodes hast, verlierst du den Zugriff auf deinen Account."]
     </p>
 </div>
 <div class="row">

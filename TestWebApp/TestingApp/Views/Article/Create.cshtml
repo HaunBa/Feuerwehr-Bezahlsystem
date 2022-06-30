@@ -1,9 +1,21 @@
-﻿@using ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using ViewModels
+@using static TestingApp.Extensions
 @model ArticleWithPriceVM
+
+@inject IViewLocalizer _loc
 
 @{
     ViewData["Title"] = "Edit Article";
     Layout = "~/Pages/Shared/_Layout.cshtml";
+
+    var list = new List<string>();
+    foreach (var item in Enum.GetValues(typeof(ArtType)))
+    {
+        list.Add(item.ToString());
+    }
+
+    var modelType = list.FirstOrDefault(x => x == Model.Type.ToString());
 }
 
 
@@ -19,18 +31,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label><br />
-                <input min="0" asp-for="Amount" class="control-label" />
+                <input min="0" asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
              <div class="form-group">
                 <label asp-for="PriceAmount" class="control-label"></label><br />
-                <input min="0" asp-for="PriceAmount" class="control-label" />
+                <input type="number" min="0" asp-for="PriceAmount" class="form-control" />
                 <span asp-validation-for="PriceAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label><br />
-                <input asp-for="Type" class="control-label" />
-                <span asp-validation-for="Type" class="text-danger"></span>
+                 <label asp-for="Type" class="control-label"></label><br />
+                <select asp-for="Type" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="@modelType">@modelType</option>
+
+                    @foreach (var item in list.Where(x => x != modelType))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ImageData" style="width: 100%;"></label>
@@ -44,7 +62,8 @@
                 <span asp-validation-for="ImageData" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="@_loc["Speichern"]" class="btn btn-primary" />
+                <a class="btn btn-warning" onclick="history.go(-1)">@_loc["Zurück"]</a>
             </div>
         </form>
     </div>

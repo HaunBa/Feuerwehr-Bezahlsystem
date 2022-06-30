@@ -1,5 +1,9 @@
-﻿@using ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using ViewModels
 @model UserWithAllInfosVM
+
+@inject IViewLocalizer _loc
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -11,7 +15,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        User Infos
+        @_loc["Benutzer Informationen"]
       </button>
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -51,7 +55,7 @@
                   @Html.DisplayNameFor(model => model.OpenCheckoutValue)
               </dt>
               <dd class="col-sm-10">
-                  @Html.DisplayFor(model => model.OpenCheckoutValue)
+                  @Html.DisplayFor(model => model.OpenCheckoutValue) €
               </dd>
               <dt class="col-sm-2">
                   @Html.DisplayNameFor(model => model.Role)
@@ -66,7 +70,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        Payments
+        @_loc["Bezahlungen"]
       </button>
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
@@ -74,12 +78,12 @@
           <table class="table table-striped">
     <thead>
         <tr>
-            <th>Payment Id</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Cash Amount</th>
-            <th>Article Count</th>
-            <th>Action</th>
+            <th>@_loc["Id"]</th>
+            <th>@_loc["Datum"]</th>
+            <th>@_loc["Beschreibung"]</th>
+            <th>@_loc["Preis"]</th>
+            <th>@_loc["Artikel Anzahl"]</th>
+            <th>@_loc["Aktion"]</th>
         </tr>
     </thead>
     <tbody>
@@ -92,7 +96,7 @@
             <td>@payment.CashAmount €</td>
             <td>@payment.Articles.Count</td>
             <td>
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">@_loc["Details"]</a>
             </td>
         </tr>
         }
@@ -104,7 +108,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        TopUps
+        @_loc["Aufladungen"]
       </button>
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -112,12 +116,12 @@
             <table class="table table-fixed table-striped">
                 <thead>
                     <tr>
-                        <th>Topup Id</th>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Cash Amount</th>
-                        <th>Executor Name</th>
-                        <th>Action</th>
+                        <th>@_loc["Id"]</th>
+                        <th>@_loc["Datum"]</th>
+                        <th>@_loc["Beschreibung"]</th>
+                        <th>@_loc["Aufladungsmenge"]</th>
+                        <th>@_loc["Ausführender"]</th>
+                        <th>@_loc["Aktion"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,7 +134,7 @@
                         <td>@topup.CashAmount €</td>
                         <td>@topup.Executor.UserName</td>
                         <td>
-                            <a class="btn btn-primary"  asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-topupId="@topup.TopUpId">Details</a>
+                            <a class="btn btn-primary"  asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-topupId="@topup.TopUpId">@_loc["Details"]</a>
                         </td>
                     </tr>
                     }
@@ -140,4 +144,4 @@
     </div>
   </div>
 </div>
-<a class="btn btn-warning" onclick="history.go(-1)">Go Back To Last Page</a>
+<a class="btn btn-warning" onclick="history.go(-1)">@_loc["Zurück zur letzten Seite"]</a>

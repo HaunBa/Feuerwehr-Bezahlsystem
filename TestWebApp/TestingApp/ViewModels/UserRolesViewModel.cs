@@ -5,23 +5,23 @@ namespace TestingApp.ViewModels
     public class UserRolesViewModel
     {
         public string Id { get; set; }
-        [Display(Name = "Username")]
+        [Display(Name = "Benutzername")]
         public string Username { get; set; }
-        [Display(Name = "First Name")]
+        [Display(Name = "Vorname")]
         public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
+        [Display(Name = "Nachname")]
         public string LastName { get; set; }
-        [Display(Name = "Balance")]
+        [Display(Name = "Kontostand")]
         public double Balance { get; set; }
-        [Display(Name = "Comment")]
+        [Display(Name = "Kommentar")]
         public string Comment { get; set; }
 
-        [Display(Name = "Open Checkout Date")]
+        [Display(Name = "Datum der offenen Kasse")]
         public DateTime OpenCheckoutDate { get; set; }
-        [Display(Name = "Open Checkout Value")]
+        [Display(Name = "Maximalwert bei offener Kasse")]
         public double OpenCheckoutValue { get; set; }
 
-        [Display(Name = "Role")]
+        [Display(Name = "Rolle")]
         public string Role { get; set; }
     }
 }

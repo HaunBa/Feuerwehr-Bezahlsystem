@@ -1,23 +1,28 @@
-﻿@using TestingApp.ViewModels
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TestingApp.ViewModels
 @model List<UserRolesViewModel>
+
+@inject IViewLocalizer _loc
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-<h1>All Users</h1>
+
+<h1>@_loc["Alle Benutzer"]</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Balance</th>
-            <th>Comment</th>
-            <th>Open Checkout Date</th>
-            <th>Open Checkout Value</th>
-            <th>Roles</th>
-            <th>Action</th>
+            <th>@_loc["Benutzername"]</th>
+            <th>@_loc["Vorname"]</th>
+            <th>@_loc["Nachname"]</th>
+            <th>@_loc["Kontostand"]</th>
+            <th>@_loc["Kommentar"]</th>
+            <th>@_loc["Datum offene Kasse"]</th>
+            <th>@_loc["Offene Kasse max Wert"]</th>
+            <th>@_loc["Rolle"]</th>
+            <th>@_loc["Aktion"]</th>
         </tr>
     </thead>
     <tbody>
@@ -33,8 +38,8 @@
             <td>@user.OpenCheckoutValue</td>
             <td>@user.Role</td>
             <td>
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.Id">Edit User</a> |
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Details" asp-route-userId="@user.Id">Details</a>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.Id">@_loc["Bearbeiten"]</a> |
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Details" asp-route-userId="@user.Id">@_loc["Details"]</a>
             </td>
         </tr>
         }

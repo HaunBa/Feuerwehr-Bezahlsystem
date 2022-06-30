@@ -1,27 +1,29 @@
 ﻿@page
 @model StatisticsModel
+@inject IViewLocalizer _loc
+
 @{
-    ViewData["Title"] = "Statistics";
+    ViewData["Title"] = @_loc["Statistiken"];
     ViewData["ActivePage"] = ManageNavPages.Statistics;
 }
 
 <div class="container">
     <div class="row">
         <div class="col">
-            <h3>Drink</h3>
+            <h3>@_loc["Getränke"]</h3>
             <canvas id="chart1" width="400" height="400"></canvas>
         </div>
         <div class="col">
-            <h3>Article Percentage</h3>
+            <h3>@_loc["Prozentuale Verteilung"]</h3>
             <canvas id="donutChart" width="400" height="400"></canvas>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            Chart 3
+            @_loc["Chart 3"]
         </div>
         <div class="col">
-            Chart 4
+            @_loc["Chart 4"]
         </div>
     </div>
 </div>

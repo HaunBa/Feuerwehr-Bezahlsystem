@@ -3,6 +3,7 @@
 @using TestingApp.Data
 @inject ApplicationDbContext _context
 @model TestingApp.Areas.Identity.Pages.Account.Manage.PurchasesModel
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Purchases";
     ViewData["ActivePage"] = ManageNavPages.Purchases;
@@ -26,16 +27,16 @@ width: 100%;
 
 </style>
 
-<h3>Purchases</h3>
+<h3>@_loc["Käufe"]</h3>
 <table class="table table-fixed table-striped">
     <thead>
         <tr>
-            <th>Payment Id</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Cash Amount</th>
-            <th>Article Count</th>
-            <th>Action</th>
+            <th>@_loc["Id"]</th>
+            <th>@_loc["Datum"]</th>
+            <th>@_loc["Beschreibung"]</th>
+            <th>@_loc["Preis"]</th>
+            <th>@_loc["Artikel Anzahl"]</th>
+            <th>@_loc["Aktion"]</th>
         </tr>
     </thead>
     <tbody>
@@ -48,7 +49,7 @@ width: 100%;
             <td>@payment.CashAmount €</td>
             <td>@payment.Articles.Count</td>
             <td>
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">Details</a>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="PaymentDetails" asp-route-paymentId="@payment.PaymentId">@_loc["Details"]</a>
             </td>
         </tr>
         }
@@ -56,16 +57,16 @@ width: 100%;
 </table>
 
 
-<h3>Top-Ups</h3>
+<h3>@_loc["Aufladungen"]</h3>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Payment Id</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Cash Amount</th>
-            <th>Executor</th>
-            <th>Action</th>
+            <th>@_loc["Id"]</th>
+            <th>@_loc["Datum"]</th>
+            <th>@_loc["Beschreibung"]</th>
+            <th>@_loc["Aufladungsmenge"]</th>
+            <th>@_loc["Ausführender"]</th>
+            <th>@_loc["Aktion"]</th>
         </tr>
     </thead>
     <tbody style="height:auto">
@@ -78,12 +79,9 @@ width: 100%;
             <td>@payment.CashAmount €</td>
             <td>@payment.Executor.UserName</td>
             <td>
-                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-paymentId="@payment.TopUpId">Details</a>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="TopUpDetails" asp-route-paymentId="@payment.TopUpId">@_loc["Details"]</a>
             </td>
         </tr>
         }
     </tbody>
 </table>
-
-
-<a class="btn btn-warning" onclick="history.go(-1)">Go Back</a>

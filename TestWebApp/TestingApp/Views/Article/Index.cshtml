@@ -1,44 +1,76 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using TestingApp.ViewModels
+@using static TestingApp.Extensions
 
 @model IEnumerable<ArticleWithPriceVM>
 
 @inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Article";
+    ViewData["Title"] = "Artikel";
     Layout = "~/Pages/Shared/_Layout.cshtml";
+
+    var artTypes = new List<string>();
+
+    foreach (var item in Enum.GetValues(typeof(ArtType)))
+    {
+        artTypes.Add(item.ToString());
+    }
+
 }
 
 <div class="container">
-    <h1>@_loc["AllArticles"]</h1>
-        <a asp-action="Create">@_loc["Create New"]</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>@_loc["Name"]</th>
-                    <th>@_loc["Price"]</th>
-                    <th>@_loc["Amount"]</th>
-                    <th>@_loc["Price Since"]</th>
-                    <th>@_loc["Price Until"]</th>
-                    <th>@_loc["Action"]</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var art in Model)
-                {
-                <tr>
-                    <td>@art.Name</td>
-                    <td>@art.PriceAmount €</td>
-                    <td>@art.Amount</td>
-                    <td>@art.Since</td>
-                    <td>@art.Until</td>
-                    <td>
-                        <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Edit Article"]</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+    <h1>@_loc["Alle Artikel"]</h1>
+    <a asp-action="Create">@_loc["Neuen Erstellen"]</a>
 
-        <a class="btn btn-warning" onclick="history.go(-1)">@_loc["Go Back To Last Page"]</a>
+    @foreach (var item in artTypes)
+    {
+        @if (Model.Where(x => x.Type.ToString() == item).Count() > 0)
+        {
+            @switch (item)
+            {
+                case "Food":
+                    <h2>Speisen</h2>
+                    break;
+                case "Drink":
+                    <h2>Getränke</h2>
+                    break;
+                case "Else":
+                    <h2>Sonstiges</h2>
+                    break;
+                default:
+                    <h2>Undefiniert</h2>
+                    break;
+            }
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@_loc["Name"]</th>
+                        <th>@_loc["Peis"]</th>
+                        <th>@_loc["Anzahl"]</th>
+                        <th>@_loc["Preis Seit"]</th>
+                        <th>@_loc["Preis Bis"]</th>
+                        <th>@_loc["Aktion"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    @foreach (var art in Model.Where(x => x.Type.ToString() == item))
+                        {
+                            <tr>
+                                <td>@art.Name</td>
+                                <td>@art.PriceAmount €</td>
+                                <td>@art.Amount</td>
+                                <td>@art.Since</td>
+                                <td>@art.Until</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Bearbeiten"]</a>
+                                </td>
+                            </tr>
+                        }
+                </tbody>
+            </table>
+        }
+        
+    }
 </div>
