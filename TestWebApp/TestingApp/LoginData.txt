@@ -1,0 +1,11 @@
+﻿Superadmin:
+	Username: SuperAdmin
+	Password: Admin123!
+
+BasicUser:
+	Username: basicUser
+	Password: Admin123!
+
+FestUser:
+	Username: Fest
+	Password: FFFFest#4064!
