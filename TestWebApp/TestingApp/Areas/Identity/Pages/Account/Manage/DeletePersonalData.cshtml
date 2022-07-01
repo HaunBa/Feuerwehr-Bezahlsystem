@@ -1,5 +1,6 @@
 ﻿@page
 @model DeletePersonalDataModel
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Delete Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
@@ -9,7 +10,7 @@
 
 <div class="alert alert-warning" role="alert">
     <p>
-        <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+        @_loc["<strong>Durch das Löschen dieser Daten wird Ihr Konto dauerhaft entfernt und kann nicht wiederhergestellt werden.</strong>"]
     </p>
 </div>
 

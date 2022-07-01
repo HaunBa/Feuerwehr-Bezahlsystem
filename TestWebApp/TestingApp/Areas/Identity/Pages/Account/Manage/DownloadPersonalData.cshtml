@@ -1,7 +1,8 @@
 ﻿@page
 @model DownloadPersonalDataModel
+@inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Download Your Data";
+    ViewData["Title"] = _loc["Lade deine Daten herunter"];
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 

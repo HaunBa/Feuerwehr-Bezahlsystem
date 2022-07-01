@@ -1,7 +1,8 @@
 ﻿@page
 @model PersonalDataModel
+@inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Personal Data";
+    ViewData["Title"] = _loc["Persönliche Daten"];
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
@@ -9,15 +10,15 @@
 
 <div class="row">
     <div class="col-md-6">
-        <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+        <p>@_loc["Ihr Konto enthält personenbezogene Daten, die Sie uns mitgeteilt haben. Auf dieser Seite können Sie diese Daten herunterladen oder löschen."]</p>
         <p>
-            <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+            @_loc["<strong>Durch das Löschen dieser Daten wird Ihr Konto dauerhaft entfernt und kann nicht wiederhergestellt werden.</strong>"]
         </p>
         <form id="download-data" asp-page="DownloadPersonalData" method="post">
-            <button class="btn btn-primary" type="submit">Download</button>
+            <button class="btn btn-primary" type="submit">@_loc["Herunterladen"]</button>
         </form>
         <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">@_loc["Löschen"]</a>
         </p>
     </div>
 </div>

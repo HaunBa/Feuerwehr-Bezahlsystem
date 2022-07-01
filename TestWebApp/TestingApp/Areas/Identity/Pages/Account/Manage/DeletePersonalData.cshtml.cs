@@ -48,6 +48,7 @@ namespace TestingApp.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Passwort")]
             public string Password { get; set; }
         }
 

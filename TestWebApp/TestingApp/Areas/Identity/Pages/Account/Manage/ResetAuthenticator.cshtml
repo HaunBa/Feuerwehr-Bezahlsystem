@@ -1,5 +1,6 @@
 ﻿@page
 @model ResetAuthenticatorModel
+@inject IViewLocalizer _loc
 @{
     ViewData["Title"] = "Reset authenticator key";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
@@ -10,15 +11,14 @@
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
-        <strong>If you reset your authenticator key your authenticator app will not work until you reconfigure it.</strong>
+        @_loc["<strong>Wenn Sie Ihren Authentifizierungsschlüssel zurücksetzen, funktioniert Ihre Authentifizierungs-App nicht, bis Sie sie neu konfigurieren.</strong>"]
     </p>
     <p>
-        This process disables 2FA until you verify your authenticator app.
-        If you do not complete your authenticator app configuration you may lose access to your account.
+        @_loc["Dieser Prozess deaktiviert 2FA, bis Sie Ihre Authentifizierungs-App verifizieren.<br/>Wenn Sie die Konfiguration Ihrer Authentifizierungs-App nicht abschließen, verlieren Sie möglicherweise den Zugriff auf Ihr Konto."]
     </p>
 </div>
 <div>
     <form id="reset-authenticator-form" method="post">
-        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">Reset authenticator key</button>
+        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">@_loc["Authentifikatorschlüssel zurücksetzen"]</button>
     </form>
 </div>

@@ -1,7 +1,8 @@
 ﻿@page
 @model GenerateRecoveryCodesModel
+@inject IViewLocalizer _loc
 @{
-    ViewData["Title"] = "Generate two-factor authentication (2FA) recovery codes";
+    ViewData["Title"] = "Zwei-Faktor-Authentifizierung (2FA).";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
@@ -10,18 +11,17 @@
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
-        <strong>Put these codes in a safe place.</strong>
+        @_loc["<strong>Bewahren Sie diese Codes an einem sicheren Ort auf.</strong>"]
     </p>
     <p>
-        If you lose your device and don't have the recovery codes you will lose access to your account.
+        @_loc["Wenn Sie Ihr Gerät verlieren und die Wiederherstellungscodes nicht haben, verlieren Sie den Zugriff auf Ihr Konto."]
     </p>
     <p>
-        Generating new recovery codes does not change the keys used in authenticator apps. If you wish to change the key
-        used in an authenticator app you should <a asp-page="./ResetAuthenticator">reset your authenticator keys.</a>
+        @_loc["Durch das Generieren neuer Wiederherstellungscodes werden die in Authentifikator-Apps verwendeten Schlüssel nicht geändert. Wenn Sie den in einer Authentifizierungs-App verwendeten Schlüssel ändern möchten, sollten Sie <a asp-page=\"./ResetAuthenticator\">Ihre Authentifizierungsschlüssel zurücksetzen.</a>"]
     </p>
 </div>
 <div>
     <form method="post">
-        <button class="btn btn-danger" type="submit">Generate Recovery Codes</button>
+        <button class="btn btn-danger" type="submit">@_loc["Wiederherstellungscodes generieren"] </button>
     </form>
 </div>
