@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Default" xml:space="preserve">
-    <value>Default</value>
+    <value>en</value>
   </data>
   <data name="ArticlesNav" xml:space="preserve">
     <value>Articles</value>

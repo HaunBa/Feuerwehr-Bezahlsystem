@@ -19,7 +19,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-    options.Stores.ProtectPersonalData = true;
+    options.Stores.ProtectPersonalData = false;
 })
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI()
@@ -37,22 +37,21 @@ builder.Services.AddAuthentication()
                     opts.ClientId = section["ClientId"];
                     opts.ClientSecret = section["ClientSecret"];
                 });
-                //.AddMicrosoftAccount(opts =>
-                //{
-                //    IConfigurationSection section =
-                //    config.GetSection("Authentication:Microsoft");
-                //    opts.ClientId = section["ClientId"];
-                //    opts.ClientSecret = section["ClientSecret"];
-                ////})
-                //.AddFacebook(opts =>
-                //{
-                //    IConfigurationSection section =
-                //    config.GetSection("Authentication:Facebook");
-                //    opts.ClientId = section["ClientId"];
-                //    opts.ClientSecret = section["ClientSecret"];
-                //    opts.AccessDeniedPath = "/AccessDenied";
-                //});
-
+//.AddMicrosoftAccount(opts =>
+//{
+//    IConfigurationSection section =
+//    config.GetSection("Authentication:Microsoft");
+//    opts.ClientId = section["ClientId"];
+//    opts.ClientSecret = section["ClientSecret"];
+////})
+//.AddFacebook(opts =>
+//{
+//    IConfigurationSection section =
+//    config.GetSection("Authentication:Facebook");
+//    opts.ClientId = section["ClientId"];
+//    opts.ClientSecret = section["ClientSecret"];
+//    opts.AccessDeniedPath = "/AccessDenied";
+//});
 
 builder.Services.AddLocalization(options =>
 {
