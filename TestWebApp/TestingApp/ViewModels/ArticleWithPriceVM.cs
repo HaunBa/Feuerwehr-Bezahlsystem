@@ -20,5 +20,9 @@ namespace TestingApp.ViewModels
         public DateTime Until { get; set; }
         [Display(Name = "Preis")]
         public double PriceAmount { get; set; }
+
+        public bool IsInVending { get; set; }
+        public int VendingSlot { get; set; }
+        public int VendingMachineNumber { get; set; }
     }
 }

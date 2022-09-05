@@ -63,7 +63,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsInVending">@_loc["Ist im Automaten"]</label>
-                <input type=""
+                <input type="checkbox" asp-for="IsInVending" data-toggle="toggle" class="form-check-input" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VendingSlot">@_loc["Automatenslot"]</label>
+                <input asp-for="VendingSlot" value="1" min="1" max="6" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VendingMachineNumber">@_loc["Automatennummer"]</label>
+                <input asp-for="VendingMachineNumber" value="1" min="1" class="form-control mb-5"/>
             </div>
 
             <div class="form-group">

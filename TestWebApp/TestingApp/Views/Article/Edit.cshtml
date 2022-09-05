@@ -1,5 +1,6 @@
 ﻿@using ViewModels
 @using static TestingApp.Extensions
+@inject IViewLocalizer _loc
 
 @model ArticleWithPriceVM
 
@@ -59,6 +60,20 @@
                        style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
                        onchange="document.getElementById('ImageData').src = window.URL.createObjectURL(this.files[0])" />
                 <span asp-validation-for="ImageData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsInVending">@_loc["Ist im Automaten"]</label>
+                <input type="checkbox" asp-for="IsInVending" data-toggle="toggle" class="form-check-input" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VendingSlot">@_loc["Automatenslot"]</label>
+                <input asp-for="VendingSlot" min="1" max="6" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VendingMachineNumber">@_loc["Automatennummer"]</label>
+                <input asp-for="VendingMachineNumber" min="1" class="form-control mb-5" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

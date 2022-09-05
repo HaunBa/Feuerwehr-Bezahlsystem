@@ -40,7 +40,7 @@ namespace TestingApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,Name,Amount,ImageData,Type,Priceid,Since,Until,PriceAmount")]ArticleWithPriceVM articleVm)
+        public async Task<IActionResult> Create([Bind("Id,Name,Amount,ImageData,Type,Priceid,Since,Until,PriceAmount,IsInVending,VendingSlot,VendingMachineNumber")]ArticleWithPriceVM articleVm)
         {
             if (Request.Form.Files.Count > 0)
             {
@@ -83,6 +83,13 @@ namespace TestingApp.Controllers
                     PriceId = fprice.PriceId
                 };
 
+                if (articleVm.IsInVending)
+                {
+                    art.IsInVending = articleVm.IsInVending;
+                    art.VendingMachineNumber = articleVm.VendingMachineNumber;
+                    art.VendingSlot = articleVm.VendingSlot;
+                }
+
                 var res = await _context.Articles.AddAsync(art);
                 await _context.SaveChangesAsync();
             }
@@ -103,7 +110,10 @@ namespace TestingApp.Controllers
                                  PriceId = article.PriceId,
                                  Since = article.Price.Since,
                                  Until = article.Price.Until,
-                                 Type = article.Type
+                                 Type = article.Type,
+                                 IsInVending = article.IsInVending,
+                                 VendingMachineNumber = article.VendingMachineNumber,
+                                 VendingSlot = article.VendingSlot
                              }).FirstOrDefaultAsync(x => x.Id == articleId);
 
             if(art == null) return NotFound();
@@ -111,7 +121,7 @@ namespace TestingApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Amount,ImageData,Type,Priceid,Since,Until,PriceAmount")] ArticleWithPriceVM articleVm)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Amount,ImageData,Type,Priceid,Since,Until,PriceAmount,IsInVending,VendingSlot,VendingMachineNumber")] ArticleWithPriceVM articleVm)
         {
             var art = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
             if (Request.Form.Files.Count > 0)
@@ -153,6 +163,19 @@ namespace TestingApp.Controllers
                 art.Name = articleVm.Name;
                 art.Type = articleVm.Type;
                 art.PriceId = fprice.PriceId;
+
+                if (articleVm.IsInVending)
+                {
+                    art.IsInVending = articleVm.IsInVending;
+                    art.VendingMachineNumber = articleVm.VendingMachineNumber;
+                    art.VendingSlot = articleVm.VendingSlot;
+                }
+                else
+                {
+                    art.IsInVending = false;
+                    art.VendingMachineNumber = 0;
+                    art.VendingSlot = 0;
+                }
 
                 var res = _context.Articles.Update(art);
                 await _context.SaveChangesAsync();
