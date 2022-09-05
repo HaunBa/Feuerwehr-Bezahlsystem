@@ -2,3 +2,13 @@
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Localization;
+global using Microsoft.AspNetCore.SignalR;
+global using Microsoft.AspNetCore.Localization;
+global using Microsoft.AspNetCore.Mvc.Razor;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;
+global using System.Globalization;
+global using TestingApp.Data;
+global using TestingApp.Middlewares;
+global using TestingApp.Hubs;
+global using TestingApp.ViewModels;

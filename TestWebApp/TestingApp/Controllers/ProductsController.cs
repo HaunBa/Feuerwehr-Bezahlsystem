@@ -12,11 +12,13 @@ namespace TestingApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHubContext<VendingHub, IVendingHub> _hubContext;
 
-        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHubContext<VendingHub, IVendingHub> hubContext)
         {
             _context = context;
             _userManager = userManager;
+            _hubContext = hubContext;
         }
 
         public async Task<IActionResult> Index()
@@ -80,6 +82,7 @@ namespace TestingApp.Controllers
             var cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
             if (cart != null)
             {
+                Dictionary<string, List<VendingItems>> vendingArticles = new();
                 // payment functionality
                 var articles = (from art in cart
                                 select new BoughtArticle
@@ -92,6 +95,7 @@ namespace TestingApp.Controllers
                                 }).ToList();
 
                 var tmp = _userManager.Users.Where(x => x.OpenCheckoutDate != DateTime.MinValue).ToList();
+                /// open Checkout user
                 var ocu = tmp.FirstOrDefault(x => DateOnly.FromDateTime(x.OpenCheckoutDate) == DateOnly.FromDateTime(DateTime.Now));
                 
                 if (ocu != null)
@@ -161,6 +165,12 @@ namespace TestingApp.Controllers
                         }
                     }
                 }
+                vendingArticles = CheckForVendingArticles(articles);
+
+                foreach (var item in vendingArticles)
+                {
+                    await _hubContext.Clients.Groups(item.Key).EjectItem(item.Value);
+                }
 
                 await _context.SaveChangesAsync();
 
@@ -170,6 +180,28 @@ namespace TestingApp.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private Dictionary<string, List<VendingItems>> CheckForVendingArticles(List<BoughtArticle> articles)
+        {
+            Dictionary<string, List<VendingItems>> Items = new();
+
+            foreach (var article in articles)
+            {
+                if (article.IsInVending)
+                {
+                    if (Items.TryGetValue(article.VendingMachineNumber.ToString(), out var value))
+                    {
+                        value.Add(new VendingItems() { Amount = article.Amount, Slot = article.VendingSlot});
+                    }
+                    else
+                    {
+                        Items.Add(article.VendingMachineNumber.ToString(), new List<VendingItems>() { new VendingItems() { Amount = article.Amount, Slot = article.VendingSlot} });                        
+                    }
+                }
+            }
+
+            return Items;
         }
 
         public async Task<IActionResult> Buy(int id)
