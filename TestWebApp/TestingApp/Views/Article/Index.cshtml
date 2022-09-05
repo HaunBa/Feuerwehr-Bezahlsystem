@@ -11,6 +11,8 @@
 
     var artTypes = new List<string>();
 
+    var vendingItems = Model.Where(x => x.IsInVending == true);
+
     foreach (var item in Enum.GetValues(typeof(ArtType)))
     {
         artTypes.Add(item.ToString());
@@ -54,8 +56,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                
-                    @foreach (var art in Model.Where(x => x.Type.ToString() == item))
+
+                    @foreach (var art in Model.Where(x => x.Type.ToString() == item && x.IsInVending == false))
                         {
                             <tr>
                                 <td>@art.Name</td>
@@ -73,4 +75,34 @@
         }
         
     }
+    
+    <h2>Automat</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@_loc["Name"]</th>
+                <th>@_loc["Peis"]</th>
+                <th>@_loc["Anzahl"]</th>
+                <th>@_loc["Preis Seit"]</th>
+                <th>@_loc["Preis Bis"]</th>
+                <th>@_loc["Aktion"]</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var art in vendingItems)
+            {
+                <tr>
+                    <td>@art.Name</td>
+                    <td>@art.PriceAmount €</td>
+                    <td>@art.Amount</td>
+                    <td>@art.Since</td>
+                    <td>@art.Until</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Article" asp-action="Edit" asp-route-articleId="@art.Id">@_loc["Bearbeiten"]</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

@@ -1,4 +1,7 @@
-﻿internal class Program
+﻿using System.Collections.Generic;
+using TestingApp.ViewModels;
+
+internal class Program
 {
     public static int pinSlot1;
     public static int pinSlot2;
@@ -7,11 +10,13 @@
     public static int pinSlot5;
     public static int pinSlot6;
 
-    public static GpioController Controller { get; set; }
+    //public static GpioController Controller { get; set; }
 
-    private async static void Main(string[] args)
+    private static void Main(string[] args)
     {
         #region Configuration
+
+        Task.Delay(1000);
 
         var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -25,7 +30,7 @@
 
         var settings = config.GetRequiredSection("Settings").Get<Settings>();
         var machineNumber = settings.VendingMachineNumber;
-        var serverUrl = settings.ServerUrl;
+        var serverUrl = settings.ServerUrl ?? "https://localhost:7066";
         var ReconnectInterval = settings.ReconnectInterval;
         pinSlot1 = settings.PinSlot1;
         pinSlot2 = settings.PinSlot2;
@@ -43,77 +48,88 @@
             .WithUrl($"{serverUrl}/VendingHub")
             .Build();
 
-        await connection.InvokeAsync("RegisterVendingmachine", machineNumber);
+        
 
         connection.Closed += async (error) =>
         {
             await Task.Delay(ReconnectInterval);
+            Console.WriteLine("Reconnecting...");
             await connection.StartAsync();
         };
 
-        connection.On<int, int, int>("EjectItem", (slot, amount, vendingNr) =>
+        connection.On<List<VendingItems>> ("EjectItem", (vendingItems) =>
         {
-            EjectItem(slot, amount, vendingNr);
+            Console.WriteLine("Recieved Vendingitems");
+            EjectItem(vendingItems);
         });
+        
+        connection.StartAsync().GetAwaiter().GetResult();
+
+        connection.InvokeAsync("RegisterVendingmachine", machineNumber).GetAwaiter().GetResult();
+
+        Console.WriteLine(connection.State);
 
         #endregion
 
         #region Setup GPIO
 
-            Controller = new GpioController();
+        //Controller = new GpioController();
 
-            Controller.OpenPin(pinSlot1, PinMode.Output);
-            Controller.OpenPin(pinSlot2, PinMode.Output);
-            Controller.OpenPin(pinSlot3, PinMode.Output);
-            Controller.OpenPin(pinSlot4, PinMode.Output);
-            Controller.OpenPin(pinSlot5, PinMode.Output);
-            Controller.OpenPin(pinSlot6, PinMode.Output);
+        //Controller.OpenPin(pinSlot1, PinMode.Output);
+        //Controller.OpenPin(pinSlot2, PinMode.Output);
+        //Controller.OpenPin(pinSlot3, PinMode.Output);
+        //Controller.OpenPin(pinSlot4, PinMode.Output);
+        //Controller.OpenPin(pinSlot5, PinMode.Output);
+        //Controller.OpenPin(pinSlot6, PinMode.Output);
 
-            Console.WriteLine(machineNumber);
+        Console.WriteLine($"Vendingmachine number: {machineNumber}");
 
         #endregion
 
         Console.ReadKey();
     }
 
-    private static void EjectItem(int slot, int amount, int vendingNr)
+    private static void EjectItem(List<VendingItems> vendingItems)
     {
-        int selectedPinSlot;
-        switch (slot)
+        foreach(var item in vendingItems)
         {
-            case 1:
-                selectedPinSlot = pinSlot2;
-                break;
-            case 2:
-                selectedPinSlot = pinSlot2;
-                break;
-            case 3:
-                selectedPinSlot = pinSlot3;
-                break;
-            case 4:
-                selectedPinSlot = pinSlot4;
-                break;
-            case 5:
-                selectedPinSlot = pinSlot5;
-                break;
-            case 6:
-                selectedPinSlot = pinSlot6;
-                break;
+            int selectedPinSlot;
+            switch (item.Slot)
+            {
+                case 1:
+                    selectedPinSlot = pinSlot2;
+                    break;
+                case 2:
+                    selectedPinSlot = pinSlot2;
+                    break;
+                case 3:
+                    selectedPinSlot = pinSlot3;
+                    break;
+                case 4:
+                    selectedPinSlot = pinSlot4;
+                    break;
+                case 5:
+                    selectedPinSlot = pinSlot5;
+                    break;
+                case 6:
+                    selectedPinSlot = pinSlot6;
+                    break;
 
-            default:
-                return;
-        }
+                default:
+                    return;
+            }
 
-        
-        for (int i = 0; i < amount; i++)
-        {
-            Controller.Write(selectedPinSlot, PinValue.High);
+            for (int i = 0; i < item.Amount; i++)
+            {
+                //Controller.Write(selectedPinSlot, PinValue.High);
+                Console.WriteLine($"{selectedPinSlot} set to High.");
 
-            Task.Delay(1000);
+                Task.Delay(1000);
 
-            Controller.Write(selectedPinSlot, PinValue.Low);
-
-            Task.Delay(5000);
+                //Controller.Write(selectedPinSlot, PinValue.Low);
+                Console.WriteLine($"{selectedPinSlot} set to Low.");
+                Task.Delay(5000);
+            }
         }
     }
 }

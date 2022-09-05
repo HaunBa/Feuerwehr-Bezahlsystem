@@ -28,7 +28,10 @@ namespace TestingApp.Controllers
                                       PriceId = article.PriceId,
                                       Since = article.Price.Since,
                                       Until = article.Price.Until,
-                                      Type = article.Type
+                                      Type = article.Type,
+                                      IsInVending = article.IsInVending,
+                                      VendingMachineNumber = article.VendingMachineNumber,
+                                      VendingSlot = article.VendingSlot
                                   }).ToListAsync();
 
             return View(articles);

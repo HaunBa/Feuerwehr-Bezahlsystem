@@ -8,11 +8,11 @@
     ViewData["Title"] = "Products";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 
-    var drinks = Model.Where(x => x.Type == ArtType.Drink).ToList();
-    var food = Model.Where(x => x.Type == ArtType.Food).ToList();
-    var stuff = Model.Where(x => x.Type == ArtType.Else).ToList();
+    var drinks = Model.Where(x => x.Type == ArtType.Drink && x.IsInVending == false).ToList();
+    var food = Model.Where(x => x.Type == ArtType.Food && x.IsInVending == false).ToList();
+    var stuff = Model.Where(x => x.Type == ArtType.Else && x.IsInVending == false).ToList();
+    var vending = Model.Where(x => x.IsInVending == true).ToList();
 
-    
 }
 
 <div class="container">
@@ -20,50 +20,95 @@
         <div class="col-sm-10">
     <h1>@_loc["AllProducts"]</h1>
     <br />
-    <h2>@_loc["Drinks"]</h2>
-    <hr />
-    @if (!Model.Any(x => x.Type == ArtType.Drink))
-    {
-        <h3>@_loc["Nothing Left"]</h3>    
-    }else{
-        <div class="container">
-            @for (int i = 0; i < drinks.Count; i+=3)
-            {
-                <div class="row gy-5" style="margin-top: 20px">
-                    @for (int x = i; x < i+3 && x < drinks.Count; x++)
+    <h2>@_loc["Automat"]</h2>
+    <hr>
+        @if (!vending.Any())
+        {
+            <h3>@_loc["Nothing Left"]</h3>
+        }else{
+                <div class="container">
+                    @for (int i = 0; i < vending.Count; i += 3)
                     {
-                        <div class="col">
-                            <a asp-action="Buy" asp-route-id="@drinks[x].Id" style="color: black; text-decoration:none">
-                                <div id="@drinks[x].Name" class="card" style="width: 18rem;">
-                                  <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
-                                      <div class="card-body">
-                                        <h5 class="card-title">@drinks[x].Name</h5>
-                                            <p class="card-text">
-                                                <div>
-                                                    <strong>@_loc["Price"]</strong> @drinks[x].PriceAmount €
-                                                </div>
-                                                <div>
-                                                    <strong>@_loc["Amount Left"]</strong> @drinks[x].Amount
-                                                </div>
-                                            </p>
-                                      </div>
+                        <div class="row gy-5" style="margin-top: 20px">
+                            @for (int x = i; x < i + 3 && x < vending.Count; x++)
+                            {
+                                <div class="col">
+                                    <a asp-action="Buy" asp-route-id="@vending[x].Id" style="color: black; text-decoration:none">
+                                        <div id="@vending[x].Name" class="card" style="width: 18rem;">
+                                            <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(vending[x].ImageData))" alt="@vending[x].Name">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@vending[x].Name</h5>
+                                                <p class="card-text">
+                                                    <div>
+                                                        <strong>@_loc["Price"]</strong> @vending[x].PriceAmount €
+                                                    </div>
+                                                    <div>
+                                                        <strong>@_loc["Amount Left"]</strong> @vending[x].Amount
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                                @if (vending.Last().Equals(vending[x]))
+                                {
+                                    <div class="col">
+                                        <!-- Empty Col for displaying the cards fittingly-->
+                                    </div>
+                                }
+                            }
                         </div>
-                        @if (drinks.Last().Equals(drinks[x]))
-                        {
-                            <div class="col">
-                                <!-- Empty Col for displaying the cards fittingly-->
-                            </div>
-                        }
                     }
                 </div>
-            } 
-            </div>
+        }
+
+
+
+    <h2>@_loc["Drinks"]</h2>
+    <hr />
+        @if (!Model.Any(x => x.Type == ArtType.Drink))
+        {
+            <h3>@_loc["Nothing Left"]</h3>    
+        }else{
+            <div class="container">
+                @for (int i = 0; i < drinks.Count; i+=3)
+                {
+                    <div class="row gy-5" style="margin-top: 20px">
+                        @for (int x = i; x < i+3 && x < drinks.Count; x++)
+                        {
+                            <div class="col">
+                                <a asp-action="Buy" asp-route-id="@drinks[x].Id" style="color: black; text-decoration:none">
+                                    <div id="@drinks[x].Name" class="card" style="width: 18rem;">
+                                      <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(drinks[x].ImageData))" alt="@drinks[x].Name">
+                                          <div class="card-body">
+                                            <h5 class="card-title">@drinks[x].Name</h5>
+                                                <p class="card-text">
+                                                    <div>
+                                                        <strong>@_loc["Price"]</strong> @drinks[x].PriceAmount €
+                                                    </div>
+                                                    <div>
+                                                        <strong>@_loc["Amount Left"]</strong> @drinks[x].Amount
+                                                    </div>
+                                                </p>
+                                          </div>
+                                    </div>
+                                </a>
+                            </div>
+                            @if (drinks.Last().Equals(drinks[x]))
+                            {
+                                <div class="col">
+                                    <!-- Empty Col for displaying the cards fittingly-->
+                                </div>
+                            }
+                        }
+                    </div>
+                } 
+                </div>
         
         <br />
         <h2>@_loc["Food"]</h2>
         <hr />
+        
         @if (!food.Any())
         {
             <h3>@_loc["Nothing Left"]</h3>    

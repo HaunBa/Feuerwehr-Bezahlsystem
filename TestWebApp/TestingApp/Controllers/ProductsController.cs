@@ -34,7 +34,11 @@ namespace TestingApp.Controllers
                                         PriceId = article.PriceId,
                                         Since = article.Price.Since,
                                         Until = article.Price.Until,
-                                        Type = article.Type
+                                        Type = article.Type,
+                                        IsInVending = article.IsInVending,
+                                        VendingMachineNumber = article.VendingMachineNumber,
+                                        VendingSlot = article.VendingSlot
+
                                     }).ToListAsync();
 
             var cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
@@ -83,6 +87,7 @@ namespace TestingApp.Controllers
             if (cart != null)
             {
                 Dictionary<string, List<VendingItems>> vendingArticles = new();
+
                 // payment functionality
                 var articles = (from art in cart
                                 select new BoughtArticle
@@ -91,7 +96,10 @@ namespace TestingApp.Controllers
                                     ImageData = art.ImageData,
                                     Name = art.Name,
                                     PriceId = art.PriceId,
-                                    Type = art.Type
+                                    Type = art.Type,
+                                    IsInVending = art.IsInVending,
+                                    VendingMachineNumber = art.VendingMachineNumber,
+                                    VendingSlot = art.VendingSlot
                                 }).ToList();
 
                 var tmp = _userManager.Users.Where(x => x.OpenCheckoutDate != DateTime.MinValue).ToList();

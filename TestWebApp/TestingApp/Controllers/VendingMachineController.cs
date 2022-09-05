@@ -7,6 +7,10 @@ namespace TestingApp.Controllers
     [ApiController]
     public class VendingMachineController : ControllerBase
     {
-
+        [HttpGet]
+        private string GetCurrentConfigVersion()
+        {
+            return "1.0.0.0";
+        }
     }
 }
