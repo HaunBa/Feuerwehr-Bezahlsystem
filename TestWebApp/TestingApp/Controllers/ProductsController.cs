@@ -103,7 +103,7 @@ namespace TestingApp.Controllers
                                 }).ToList();
 
                 var tmp = _userManager.Users.Where(x => x.OpenCheckoutDate != DateTime.MinValue).ToList();
-                /// open Checkout user
+                // open Checkout user
                 var ocu = tmp.FirstOrDefault(x => DateOnly.FromDateTime(x.OpenCheckoutDate) == DateOnly.FromDateTime(DateTime.Now));
                 
                 if (ocu != null)

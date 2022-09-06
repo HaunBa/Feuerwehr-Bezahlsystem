@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaiterApp", "WaiterApp\Wait
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVender", "SmartVender\SmartVender.csproj", "{54983571-93D7-4F9F-B819-01D25AB6E501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartVendor-Client", "SmartVendor-Client\SmartVendor-Client.csproj", "{B043E68C-D1DA-4493-A729-C472A10BD166}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{54983571-93D7-4F9F-B819-01D25AB6E501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54983571-93D7-4F9F-B819-01D25AB6E501}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54983571-93D7-4F9F-B819-01D25AB6E501}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B043E68C-D1DA-4493-A729-C472A10BD166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B043E68C-D1DA-4493-A729-C472A10BD166}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B043E68C-D1DA-4493-A729-C472A10BD166}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B043E68C-D1DA-4493-A729-C472A10BD166}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

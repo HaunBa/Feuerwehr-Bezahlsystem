@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using TestingApp.ViewModels;
-using Unosquare.RaspberryIO;
+﻿using Iot.Device.Mfrc522;
 
 internal class Program
 {
@@ -11,7 +9,7 @@ internal class Program
     public static int pinSlot5;
     public static int pinSlot6;
 
-    //public static GpioController Controller { get; set; }
+    public static GpioController Controller { get; set; }
 
     private static void Main(string[] args)
     {
@@ -25,7 +23,7 @@ internal class Program
 
         var config = configuration.Build();
 
-        var version = config.GetRequiredSection("Version").Get<VersionSettings>();
+        var version = config.GetRequiredSection("VersionSettings").Get<VersionSettings>();
         
         var configVersion = version.ConfigVersion;
 
@@ -75,49 +73,45 @@ internal class Program
 
         #region Setup GPIO
 
-        
+        Controller = new GpioController();
 
-        //Controller = new GpioController();
+        Controller.OpenPin(pinSlot1, PinMode.Output);
 
-        //Controller.OpenPin(pinSlot1, PinMode.Output);
-
-        //Controller.OpenPin(pinSlot2, PinMode.Output);
-        //Controller.OpenPin(pinSlot3, PinMode.Output);
-        //Controller.OpenPin(pinSlot4, PinMode.Output);
-        //Controller.OpenPin(pinSlot5, PinMode.Output);
-        //Controller.OpenPin(pinSlot6, PinMode.Output);
+        Controller.OpenPin(pinSlot2, PinMode.Output);
+        Controller.OpenPin(pinSlot3, PinMode.Output);
+        Controller.OpenPin(pinSlot4, PinMode.Output);
+        Controller.OpenPin(pinSlot5, PinMode.Output);
+        Controller.OpenPin(pinSlot6, PinMode.Output);
 
         Console.WriteLine($"Vendingmachine number: {machineNumber}");
 
         #endregion
-
-        Thread.Sleep(-1);
     }
 
     private static Task EjectItem(List<VendingItems> vendingItems)
     {
         foreach(var item in vendingItems)
         {
-            Unosquare.RaspberryIO.Abstractions.IGpioPin selectedPinSlot;
+            int selectedPinSlot;
             switch (item.Slot)
             {
                 case 1:
-                    selectedPinSlot = Pi.Gpio[pinSlot1];
+                    selectedPinSlot = pinSlot1;
                     break;
                 case 2:
-                    selectedPinSlot = Pi.Gpio[pinSlot2];
+                    selectedPinSlot = pinSlot2;
                     break;
                 case 3:
-                    selectedPinSlot = Pi.Gpio[pinSlot3];
+                    selectedPinSlot = pinSlot3;
                     break;
                 case 4:
-                    selectedPinSlot = Pi.Gpio[pinSlot4];
+                    selectedPinSlot = pinSlot4;
                     break;
                 case 5:
-                    selectedPinSlot = Pi.Gpio[pinSlot5];
+                    selectedPinSlot = pinSlot5;
                     break;
                 case 6:
-                    selectedPinSlot = Pi.Gpio[pinSlot6];
+                    selectedPinSlot = pinSlot6;
                     break;
 
                 default:
