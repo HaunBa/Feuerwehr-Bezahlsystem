@@ -177,8 +177,14 @@ namespace TestingApp.Controllers
 
                 foreach (var item in vendingArticles)
                 {
-                    await _hubContext.Clients.Groups(item.Key).EjectItem(item.Value);
+                    await _hubContext.Clients.Group(item.Key).EjectItem(item.Value);
                 }
+
+                //foreach (var item in articles)
+                //{
+                //    await _hubContext.Clients.Group(item.VendingMachineNumber.ToString()).EjectItem(new() { new VendingItems() { Amount = 2, Slot = 1} });
+                //    Console.WriteLine("Sent Call to Group " + item.VendingMachineNumber);
+                //}
 
                 await _context.SaveChangesAsync();
 
@@ -225,7 +231,10 @@ namespace TestingApp.Controllers
                                                           PriceId = article.PriceId,
                                                           Since = article.Price.Since,
                                                           Until = article.Price.Until,
-                                                          Type = article.Type
+                                                          Type = article.Type,
+                                                          IsInVending = article.IsInVending,
+                                                          VendingMachineNumber = article.VendingMachineNumber,
+                                                          VendingSlot = article.VendingSlot
                                                       }).FirstOrDefaultAsync(x => x.Id == id);
 
             var newArt = new ArticleWithPriceVM
@@ -238,7 +247,10 @@ namespace TestingApp.Controllers
                 PriceId = productModel.PriceId,
                 Since = productModel.Since,
                 Type = productModel.Type,
-                Until = productModel.Until
+                Until = productModel.Until,
+                IsInVending = productModel.IsInVending,
+                VendingMachineNumber = productModel.VendingMachineNumber,
+                VendingSlot = productModel.VendingSlot
             };
 
             if (SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart") == null)

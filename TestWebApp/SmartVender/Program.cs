@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TestingApp.ViewModels;
+using Unosquare.RaspberryIO;
 
 internal class Program
 {
@@ -16,7 +17,7 @@ internal class Program
     {
         #region Configuration
 
-        Task.Delay(1000);
+        Task.Delay(3000).Wait();
 
         var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -32,6 +33,7 @@ internal class Program
         var machineNumber = settings.VendingMachineNumber;
         var serverUrl = settings.ServerUrl ?? "https://localhost:7066";
         var ReconnectInterval = settings.ReconnectInterval;
+
         pinSlot1 = settings.PinSlot1;
         pinSlot2 = settings.PinSlot2;
         pinSlot3 = settings.PinSlot3;
@@ -57,15 +59,15 @@ internal class Program
             await connection.StartAsync();
         };
 
-        connection.On<List<VendingItems>> ("EjectItem", (vendingItems) =>
+        connection.On<List<VendingItems>> ("EjectItem", async (vendingItems) =>
         {
             Console.WriteLine("Recieved Vendingitems");
-            EjectItem(vendingItems);
+            await EjectItem(vendingItems);
         });
         
         connection.StartAsync().GetAwaiter().GetResult();
 
-        connection.InvokeAsync("RegisterVendingmachine", machineNumber).GetAwaiter().GetResult();
+        connection.InvokeAsync("RegisterVendingmachine", machineNumber);
 
         Console.WriteLine(connection.State);
 
@@ -73,9 +75,12 @@ internal class Program
 
         #region Setup GPIO
 
+        
+
         //Controller = new GpioController();
 
         //Controller.OpenPin(pinSlot1, PinMode.Output);
+
         //Controller.OpenPin(pinSlot2, PinMode.Output);
         //Controller.OpenPin(pinSlot3, PinMode.Output);
         //Controller.OpenPin(pinSlot4, PinMode.Output);
@@ -86,50 +91,51 @@ internal class Program
 
         #endregion
 
-        Console.ReadKey();
+        Thread.Sleep(-1);
     }
 
-    private static void EjectItem(List<VendingItems> vendingItems)
+    private static Task EjectItem(List<VendingItems> vendingItems)
     {
         foreach(var item in vendingItems)
         {
-            int selectedPinSlot;
+            Unosquare.RaspberryIO.Abstractions.IGpioPin selectedPinSlot;
             switch (item.Slot)
             {
                 case 1:
-                    selectedPinSlot = pinSlot2;
+                    selectedPinSlot = Pi.Gpio[pinSlot1];
                     break;
                 case 2:
-                    selectedPinSlot = pinSlot2;
+                    selectedPinSlot = Pi.Gpio[pinSlot2];
                     break;
                 case 3:
-                    selectedPinSlot = pinSlot3;
+                    selectedPinSlot = Pi.Gpio[pinSlot3];
                     break;
                 case 4:
-                    selectedPinSlot = pinSlot4;
+                    selectedPinSlot = Pi.Gpio[pinSlot4];
                     break;
                 case 5:
-                    selectedPinSlot = pinSlot5;
+                    selectedPinSlot = Pi.Gpio[pinSlot5];
                     break;
                 case 6:
-                    selectedPinSlot = pinSlot6;
+                    selectedPinSlot = Pi.Gpio[pinSlot6];
                     break;
 
                 default:
-                    return;
+                    return Task.CompletedTask;
             }
 
             for (int i = 0; i < item.Amount; i++)
             {
                 //Controller.Write(selectedPinSlot, PinValue.High);
-                Console.WriteLine($"{selectedPinSlot} set to High.");
 
-                Task.Delay(1000);
+                Thread.Sleep(1000);
+
+                Console.WriteLine($"Ejected Article from Slot {item.Slot} with Pin Slot {selectedPinSlot} : {i+1} / {item.Amount}");
 
                 //Controller.Write(selectedPinSlot, PinValue.Low);
-                Console.WriteLine($"{selectedPinSlot} set to Low.");
-                Task.Delay(5000);
+                Thread.Sleep(5000);
             }
         }
+        return Task.CompletedTask;
     }
 }
