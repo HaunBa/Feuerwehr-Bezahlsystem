@@ -1,6 +1,4 @@
-﻿using Iot.Device.Mfrc522;
-
-internal class Program
+﻿internal class Program
 {
     public static int pinSlot1;
     public static int pinSlot2;
@@ -18,8 +16,8 @@ internal class Program
         Task.Delay(3000).Wait();
 
         var configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile($"appsettings.json");
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile($"appsettings.json");
 
         var config = configuration.Build();
 
