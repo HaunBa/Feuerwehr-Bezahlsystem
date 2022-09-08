@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 // read config values
 var configuration = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile($"appsettings.json");
+                        .AddJsonFile($"WifiConnectionSettings.json");
 
 var config = configuration.Build();
 
@@ -13,10 +13,12 @@ var version = config.GetRequiredSection("Settings")
 
 // start shell to connect to wifi
 System.Diagnostics.Process setupProcess = new System.Diagnostics.Process();
-System.Diagnostics.ProcessStartInfo setupstartInfo = new System.Diagnostics.ProcessStartInfo();
-setupstartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-setupstartInfo.FileName = "cmd.exe";
-setupstartInfo.Arguments = $"netsh wlan set hostednetwork mode=allow ssid={version.WifiName} key={version.WifiPassword}";
+System.Diagnostics.ProcessStartInfo setupstartInfo = new()
+{
+    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
+    FileName = "cmd.exe",
+    Arguments = $"netsh wlan set hostednetwork mode=allow ssid={version.WifiName} key={version.WifiPassword}"
+};
 setupProcess.StartInfo = setupstartInfo;
 setupProcess.Start();
 
@@ -36,10 +38,11 @@ setupProcess.WaitForExit(10000);
 // start SmartVender and restart after exiting
 while (true)
 {
-    System.Diagnostics.Process smartVenderProcess = new System.Diagnostics.Process();
-    System.Diagnostics.ProcessStartInfo smartVenderStartInfo = new System.Diagnostics.ProcessStartInfo();
-    smartVenderStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-    smartVenderStartInfo.FileName = "SmartVender.exe";
+    System.Diagnostics.Process smartVenderProcess = new ();
+    System.Diagnostics.ProcessStartInfo smartVenderStartInfo = new()
+    {
+        FileName = "SmartVender.exe"
+    };
     smartVenderProcess.StartInfo = smartVenderStartInfo;
     smartVenderProcess.Start();
 

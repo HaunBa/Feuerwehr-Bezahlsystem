@@ -12,7 +12,6 @@
     var food = Model.Where(x => x.Type == ArtType.Food && x.IsInVending == false).ToList();
     var stuff = Model.Where(x => x.Type == ArtType.Else && x.IsInVending == false).ToList();
     var vending = Model.Where(x => x.IsInVending == true).ToList();
-
 }
 
 <div class="container">

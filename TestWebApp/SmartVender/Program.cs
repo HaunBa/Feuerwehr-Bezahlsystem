@@ -7,7 +7,7 @@
     public static int pinSlot5;
     public static int pinSlot6;
 
-    public static GpioController Controller { get; set; }
+    public static GpioController? Controller { get; set; }
 
     private static void Main(string[] args)
     {
@@ -81,7 +81,7 @@
         Controller.OpenPin(pinSlot5, PinMode.Output);
         Controller.OpenPin(pinSlot6, PinMode.Output);
 
-        Console.WriteLine($"Vendingmachine number: {machineNumber}");
+        Console.WriteLine($"Vendingmachine number: { machineNumber }");
 
         #endregion
     }
