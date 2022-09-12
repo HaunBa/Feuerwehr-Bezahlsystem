@@ -3,8 +3,9 @@
 import json
 from typing import Any
 from dataclasses import dataclass
-from requests import Session
-from signalr import Connection
+import websockets
+import requests
+import asyncio
 
 # Classes
 
@@ -20,6 +21,7 @@ class Root:
     PinSlot5: int
     PinSlot6: int
     ServerUrl: str
+    HubName: str
 
     @staticmethod
     def from_dict(obj: Any) -> 'Root':
@@ -33,8 +35,9 @@ class Root:
         _PinSlot5 = int(obj.get("PinSlot5"))
         _PinSlot6 = int(obj.get("PinSlot6"))
         _ServerUrl = str(obj.get("ServerUrl"))
+        _HubName = str(obj.get("HubName"))
 
-        return Root(_ConfigVersion, _VendingMachineNumber, _ReconnectInterval, _PinSlot1, _PinSlot2, _PinSlot3, _PinSlot4, _PinSlot5, _PinSlot6, _ServerUrl)
+        return Root(_ConfigVersion, _VendingMachineNumber, _ReconnectInterval, _PinSlot1, _PinSlot2, _PinSlot3, _PinSlot4, _PinSlot5, _PinSlot6, _ServerUrl, _HubName)
 
 
 # load config
@@ -44,30 +47,75 @@ root = Root.from_dict(jsonstring)
 
 # connect to signalR
 
-with Session() as session:
-    # create connection
-    connection = Connection(root.ServerUrl, session)
+negotiation = requests.post(root.ServerUrl+'/VendingHub/negotiateVersion=0').json()
 
-    # get hub
-    hub = connection.register_hub('vendingHub')
+def toSignalRMessage(data):
+    return f'{json.dumps(data)}\u001e'
 
-    connection.start()
+async def connectToHub(connectionId):
+    uri = f"ws://{root.ServerUrl}/{root.HubName}?id={connectionId}"
+    async with websockets.connect(uri) as websocket:
 
-    # ejectItem handler
-    def eject_recievedItem(data):
-        print('received: ', data)
+        async def start_pinging():
+            while _running:
+                await asyncio.sleep(10)
+                await websocket.send(toSignalRMessage({"type": 6}))
 
-    # error handler
-    def print_error_to_console(error):
-        print('error: ', error)
+        async def handshake():
+            await websocket.send(toSignalRMessage({"protocol": "json", "version": 1}))
+            handshake_response = await websocket.recv()
+            print(f"handshake_response: {handshake_response}")
 
-    # register methods
-    hub.client.on("EjectItem", eject_recievedItem)
+        async def listen():
+            while _running:
+                get_response = await websocket.recv()
+                print(f"get_response: {get_response}")
 
-    connection.error += print_error_to_console
+        await handshake()
 
-    # start connection
-    with connection:
+        _running = True
+        listen_task = asyncio.create_task(listen())
+        ping_task = asyncio.create_task(start_pinging())
 
-        # register vending machine
-        hub.server.invoke('RegisterVendingmachine', root.VendingMachineNumber)
+        # start
+        start_message = {
+            "type": 1,
+            "invocationId": "invocation_id",
+            "target": "RegisterVendingmachine",
+            "arguments": [
+                root.VendingMachineNumber
+            ],
+            "streamIds": [
+                "stream_id"
+            ]
+        }
+
+        await websocket.send(toSignalRMessage(start_message))
+        # send
+
+        message = {
+            "type": 2,
+            "invocationId": "stream_id",
+            "item": f'{root.VendingMachineNumber}'
+        }
+        await websocket.send(toSignalRMessage(message))
+        await asyncio.sleep(2)
+
+        # end
+
+        completion_message = {
+            "type": 3,
+            "invocationId": "stream_id"
+        }
+
+        await websocket.send(toSignalRMessage(completion_message))
+        await asyncio.sleep(2)
+
+        _running = False
+        await ping_task
+
+        print(f"connectionId: {negotiation['connectionId']}")
+        asyncio.run(connectToHub(negotiation['connectionId']))
+
+        while (True):
+            await listen_task
