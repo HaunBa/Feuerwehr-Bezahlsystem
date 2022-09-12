@@ -15,8 +15,11 @@
 
         public async Task EjectItem(List<VendingItems> vendingItems, int vendingNr) => await Clients.Group(vendingNr.ToString()).EjectItem(vendingItems);
 
-        public async Task RegisterVendingmachine(int vendingNr) => await Groups.AddToGroupAsync(Context.ConnectionId, vendingNr.ToString());
-
+        public async Task RegisterVendingmachine(int vendingNr)
+        {
+            Console.WriteLine($"Vending Machine {vendingNr} registered");
+            await Groups.AddToGroupAsync(Context.ConnectionId, vendingNr.ToString());
+        }
         public async Task AddArticleToBought(int slot, int vendingNr, string? username)
         {
             

@@ -131,7 +131,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<VendingHub>("/VendingHub");
+});
+
 app.MapRazorPages();
-app.MapHub<VendingHub>("/VendingHub");
 
 app.Run();

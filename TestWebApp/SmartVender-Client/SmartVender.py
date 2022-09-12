@@ -47,13 +47,12 @@ root = Root.from_dict(jsonstring)
 
 # connect to signalR
 
-negotiation = requests.post(root.ServerUrl+'/VendingHub/negotiateVersion=0').json()
-
+negotiation = requests.post('https://localhost:7066/VendingHub/negotiateVersion=0').json()
 def toSignalRMessage(data):
     return f'{json.dumps(data)}\u001e'
 
 async def connectToHub(connectionId):
-    uri = f"ws://{root.ServerUrl}/{root.HubName}?id={connectionId}"
+    uri = f"wss://localhost:7066/{root.HubName}"
     async with websockets.connect(uri) as websocket:
 
         async def start_pinging():

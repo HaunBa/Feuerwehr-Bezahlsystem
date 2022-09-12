@@ -1,2 +1,7 @@
 websockets
 requests
+signalr-async
+typing_extensions
+gevent
+sseclient
+websocket-client
