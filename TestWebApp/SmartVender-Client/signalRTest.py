@@ -4,7 +4,7 @@ import sys
 from requests import Session
 from signalr import Connection
 
-url = "https://localhost:7066/"
+url = "http://localhost:5066/"
 
 sys.setrecursionlimit(1000)
 
