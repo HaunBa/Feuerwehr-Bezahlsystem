@@ -71,17 +71,19 @@
 
         #region Setup GPIO
 
-        Controller = new GpioController();
+        //Controller = new GpioController();
 
-        Controller.OpenPin(pinSlot1, PinMode.Output);
+        //Controller.OpenPin(pinSlot1, PinMode.Output);
 
-        Controller.OpenPin(pinSlot2, PinMode.Output);
-        Controller.OpenPin(pinSlot3, PinMode.Output);
-        Controller.OpenPin(pinSlot4, PinMode.Output);
-        Controller.OpenPin(pinSlot5, PinMode.Output);
-        Controller.OpenPin(pinSlot6, PinMode.Output);
+        //Controller.OpenPin(pinSlot2, PinMode.Output);
+        //Controller.OpenPin(pinSlot3, PinMode.Output);
+        //Controller.OpenPin(pinSlot4, PinMode.Output);
+        //Controller.OpenPin(pinSlot5, PinMode.Output);
+        //Controller.OpenPin(pinSlot6, PinMode.Output);
 
         Console.WriteLine($"Vendingmachine number: { machineNumber }");
+
+        Thread.Sleep(int.MaxValue);
 
         #endregion
     }

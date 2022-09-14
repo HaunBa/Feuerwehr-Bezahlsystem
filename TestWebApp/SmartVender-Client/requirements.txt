@@ -5,3 +5,4 @@ typing_extensions
 gevent
 sseclient
 websocket-client
+signalr-client

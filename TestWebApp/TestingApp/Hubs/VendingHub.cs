@@ -20,7 +20,9 @@
             Console.WriteLine($"Vending Machine {vendingNr} registered");
             await Groups.AddToGroupAsync(Context.ConnectionId, vendingNr.ToString());
         }
+
         public async Task AddArticleToBought(int slot, int vendingNr, string? username)
+
         {
             
             var fArticle = await _context.Articles.FirstOrDefaultAsync(x => x.IsInVending == true && x.VendingSlot == slot && x.VendingMachineNumber == vendingNr);
@@ -45,7 +47,7 @@
                 };
 
                 var currentDate = DateTime.Now;
-
+                var tmp = fPerson.Email;
                 var newPayment = new Payment()
                 {
                     Articles = new List<BoughtArticle>() { boughtArticle },
