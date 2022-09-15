@@ -9,7 +9,7 @@ var thisProcess = Process.GetCurrentProcess();
 var process = new Process{
         StartInfo = new ProcessStartInfo
         {
-            FileName = typeof(Program).Assembly.GetName().Name+".exe",
+            FileName = typeof(Program).Assembly.GetName().Name + ".exe",
             UseShellExecute = false,
             RedirectStandardOutput = true,
             CreateNoWindow = false
