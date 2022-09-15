@@ -9,6 +9,8 @@ namespace GitHubUpdater
 {
     public class GitUpdater
     {
+        public Process process = new Process();
+
         public async Task Start()
         {
             //while (true)
@@ -26,14 +28,14 @@ namespace GitHubUpdater
             Console.WriteLine("remoteVersion: " + remoteVersion);
 
             var localVersion = GetLocalVersion();
-            Console.WriteLine("localVersion: " + localVersion);
+            Console.WriteLine("localVersion: "+ localVersion);
         }
 
         private string GetRemoteVersion()
         {
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "git rev-parse @";
+            process.StartInfo.Arguments = "git rev-parse origin";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.Start();
@@ -46,7 +48,7 @@ namespace GitHubUpdater
         {
             Process process = new Process();
             process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "git rev-parse origin";
+            process.StartInfo.Arguments = "git rev-parse @";
             process.StartInfo.RedirectStandardOutput = true;
             process.Start();
 

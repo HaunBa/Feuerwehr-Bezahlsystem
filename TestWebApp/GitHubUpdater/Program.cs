@@ -1,4 +1,4 @@
 ﻿using GitHubUpdater;
 
 GitUpdater GitUpdater = new GitUpdater();
-GitUpdater.Start();
+await GitUpdater.Start();
