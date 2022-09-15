@@ -26,5 +26,6 @@ Thread.Sleep(1000);
 
 Console.WriteLine("Killing this Process...");
 thisProcess.Kill();
+thisProcess.Close();
 
 Console.WriteLine("Killed?");
