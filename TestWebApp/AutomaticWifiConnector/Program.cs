@@ -1,5 +1,8 @@
 ﻿using AutomaticWifiConnector.Classes;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
+using System.Globalization;
+using System.Net;
 
 // read config values
 var configuration = new ConfigurationBuilder()
@@ -11,40 +14,73 @@ var config = configuration.Build();
 var version = config.GetRequiredSection("Settings")
                     .Get<Settings>();
 
-// start shell to connect to wifi
-System.Diagnostics.Process setupProcess = new System.Diagnostics.Process();
-System.Diagnostics.ProcessStartInfo setupstartInfo = new()
+if (!CheckForInternetConnection())
 {
-    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
-    FileName = "cmd.exe",
-    Arguments = $"netsh wlan set hostednetwork mode=allow ssid={version.WifiName} key={version.WifiPassword}"
-};
-setupProcess.StartInfo = setupstartInfo;
-setupProcess.Start();
+    // start shell to connect to wifi
+    Process setupProcess = new Process();
+    ProcessStartInfo setupstartInfo = new()
+    {
+        WindowStyle = ProcessWindowStyle.Hidden,
+        FileName = "cmd.exe",
+        Arguments = $"netsh wlan set hostednetwork mode=allow ssid={version.WifiName} key={version.WifiPassword}"
+    };
+    setupProcess.StartInfo = setupstartInfo;
+    setupProcess.Start();
 
-setupProcess.WaitForExit(10000);
+    setupProcess.WaitForExit(10000);
 
-// connect to wifi
-System.Diagnostics.Process process = new System.Diagnostics.Process();
-System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-startInfo.FileName = "cmd.exe";
-startInfo.Arguments = $"netsh wlan start hostednetwork";
-process.StartInfo = startInfo;
-process.Start();
+    // connect to wifi
+    Process process = new();
+    ProcessStartInfo startInfo = new ();
+    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+    startInfo.FileName = "cmd.exe";
+    startInfo.Arguments = $"netsh wlan start hostednetwork";
+    process.StartInfo = startInfo;
+    process.Start();
 
-setupProcess.WaitForExit(10000);
+    setupProcess.WaitForExit(10000);
+}
+var processes = Process.GetProcessesByName(version.ProcessName);
+
+if (processes.Length != 0)
+{
+    foreach (var item in processes)
+    {
+        item.Kill();
+    }
+}
 
 // start SmartVender and restart after exiting
 while (true)
 {
-    System.Diagnostics.Process smartVenderProcess = new ();
-    System.Diagnostics.ProcessStartInfo smartVenderStartInfo = new()
+    Process smartVenderProcess = new();
+    ProcessStartInfo smartVenderStartInfo = new()
     {
-        FileName = "SmartVender.exe"
+        FileName = version.ProcessName
     };
     smartVenderProcess.StartInfo = smartVenderStartInfo;
     smartVenderProcess.Start();
 
     smartVenderProcess.WaitForExit();
+}
+
+static bool CheckForInternetConnection(int timeoutMs = 10000)
+{
+    try
+    {        
+        string url = "https://www.google.com";
+
+        var timeOut = TimeSpan.FromSeconds(timeoutMs);
+
+        var client = new HttpClient();
+        client.BaseAddress = new Uri(url);
+
+        client.Timeout = timeOut;
+        using var response = client.Send(new HttpRequestMessage());
+        return true;
+    }
+    catch
+    {
+        return false;
+    }
 }

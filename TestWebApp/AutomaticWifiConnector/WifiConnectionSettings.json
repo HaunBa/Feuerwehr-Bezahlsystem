@@ -1,6 +1,7 @@
 {
   "Settings": {
     "WifiName": "Fronius",
-    "WifiPassword" : "Password123"
+    "WifiPassword": "Password123",
+    "ProcessName": "SmartVender.exe"
   }
 }

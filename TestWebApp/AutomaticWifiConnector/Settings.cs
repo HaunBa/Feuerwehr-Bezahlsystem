@@ -10,5 +10,6 @@ namespace AutomaticWifiConnector.Classes
     {
         public string WifiName { get; set; }
         public string? WifiPassword { get; set; }
+        public string ProcessName { get; set; }
     }
 }
