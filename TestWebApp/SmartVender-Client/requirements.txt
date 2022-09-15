@@ -1,8 +1,8 @@
-websockets
-requests
-signalr-async
-typing_extensions
-gevent
-sseclient
-websocket-client
-signalr-client
+msgpack==1.0.2
+requests>=2.22.0
+websocket-client==1.0.0
+dataclasses
+rpi.gpio
+mfrc522
+signalrcore.hub_connection_builder
+signalrcore.hub.base_hub_connection
