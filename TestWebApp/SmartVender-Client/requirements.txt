@@ -2,7 +2,6 @@ msgpack==1.0.2
 requests>=2.22.0
 websocket-client==1.0.0
 dataclasses
-rpi.gpio
+RPi.GPIO
 mfrc522
-signalrcore.hub_connection_builder
-signalrcore.hub.base_hub_connection
+signalrcore

@@ -1,17 +1,21 @@
+#!/usr/bin/env python3.6
+
 import time
 import json
 from signalrcore.hub.base_hub_connection import BaseHubConnection
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 from typing import Any
 from dataclasses import dataclass
+
 # import RPI-GPIO as GPIO
-# from mfrc522 import SimpleMFRC522
+from mfrc522 import SimpleMFRC522
 
 # reader = SimpleMFRC522()
 GPIO = ""
 
+
 @dataclass
-class Root:
+class Settings:
     ConfigVersion: str
     VendingMachineNumber: int
     ReconnectInterval: int
@@ -25,7 +29,7 @@ class Root:
     HubName: str
 
     @staticmethod
-    def from_dict(obj: Any) -> 'Root':
+    def from_dict(obj: Any) -> 'Settings':
         _ConfigVersion = str(obj.get("ConfigVersion"))
         _VendingMachineNumber = int(obj.get("VendingMachineNumber"))
         _ReconnectInterval = int(obj.get("ReconnectInterval"))
@@ -38,28 +42,28 @@ class Root:
         _ServerUrl = str(obj.get("ServerUrl"))
         _HubName = str(obj.get("HubName"))
 
-        return Root(_ConfigVersion, _VendingMachineNumber, _ReconnectInterval, _PinSlot1, _PinSlot2, _PinSlot3,
-                    _PinSlot4, _PinSlot5, _PinSlot6, _ServerUrl, _HubName)
+        return Settings(_ConfigVersion, _VendingMachineNumber, _ReconnectInterval, _PinSlot1, _PinSlot2, _PinSlot3,
+                        _PinSlot4, _PinSlot5, _PinSlot6, _ServerUrl, _HubName)
 
 
 # load config
 
 jsonstring = json.load(open("appsettings.json"))
-root = Root.from_dict(jsonstring)
+settings = Settings.from_dict(jsonstring)
 
-server_url = "wss://" + root.ServerUrl + "/" + root.HubName
+server_url = "wss://" + settings.ServerUrl + "/" + settings.HubName
 
 mes = ""
 
 # setup GPIO
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(root.PinSlot1, GPIO.OUT)
-GPIO.setup(root.PinSlot2, GPIO.OUT)
-GPIO.setup(root.PinSlot3, GPIO.OUT)
-GPIO.setup(root.PinSlot4, GPIO.OUT)
-GPIO.setup(root.PinSlot5, GPIO.OUT)
-GPIO.setup(root.PinSlot6, GPIO.OUT)
+GPIO.setup(settings.PinSlot1, GPIO.OUT)
+GPIO.setup(settings.PinSlot2, GPIO.OUT)
+GPIO.setup(settings.PinSlot3, GPIO.OUT)
+GPIO.setup(settings.PinSlot4, GPIO.OUT)
+GPIO.setup(settings.PinSlot5, GPIO.OUT)
+GPIO.setup(settings.PinSlot6, GPIO.OUT)
 
 
 # GPIO.setup(root.InputSlot1, GPIO.IN)
@@ -70,7 +74,7 @@ GPIO.setup(root.PinSlot6, GPIO.OUT)
 # GPIO.setup(root.InputSlot6, GPIO.IN)
 
 def _on_connect():
-    hub_connection.send("RegisterVendingmachine", [root.VendingMachineNumber])
+    hub_connection.send("RegisterVendingmachine", [settings.VendingMachineNumber])
 
 
 # def ReadRFID():
@@ -81,7 +85,7 @@ def _on_connect():
 #        time.sleep(5)
 
 
-def take_message(IncomingVendingItems):
+def eject_item(IncomingVendingItems):
     vending_items = IncomingVendingItems[0]
     for val in vending_items["amount"]:
         time.sleep(1000)
@@ -97,12 +101,12 @@ hub_connection: BaseHubConnection = HubConnectionBuilder() \
     "type": "raw",
     "keep_alive_interval": 10,
     "reconnect_interval": 5,
-    "max_attempts": 5
+    "max_attempts": 5,
 }).build()
 
 hub_connection.start()
 hub_connection.on_open(_on_connect)
-hub_connection.on("EjectItem", take_message)
+hub_connection.on("EjectItem", eject_item)
 
 while True:
     try:

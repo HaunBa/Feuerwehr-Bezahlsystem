@@ -4,7 +4,7 @@ from signalrcore.hub.base_hub_connection import BaseHubConnection
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 from typing import Any
 from dataclasses import dataclass
-# import RPI-GPIO as GPIO
+# import RPi-GPIO as GPIO
 # from mfrc522 import SimpleMFRC522
 
 # reader = SimpleMFRC522()
@@ -84,11 +84,12 @@ def _on_connect():
 def take_message(IncomingVendingItems):
     vending_items = IncomingVendingItems[0]
     for val in vending_items["amount"]:
-        time.sleep(1000)
-        GPIO.output(val, True)
-        time.sleep(5000)
-        GPIO.output(val, False)
-        time.sleep(1000)
+        for value in vending_items["slot"]:
+            time.sleep(1000)
+            GPIO.output(value, True)
+            time.sleep(5000)
+            GPIO.output(value, False)
+            time.sleep(1000)
 
 
 hub_connection: BaseHubConnection = HubConnectionBuilder() \
