@@ -72,10 +72,11 @@ static bool CheckForInternetConnection(int timeoutMs = 10000)
 
         var timeOut = TimeSpan.FromSeconds(timeoutMs);
 
-        var client = new HttpClient();
-        client.BaseAddress = new Uri(url);
-
-        client.Timeout = timeOut;
+        var client = new HttpClient
+        {
+            BaseAddress = new Uri(url),            
+            Timeout = timeOut
+        };
         using var response = client.Send(new HttpRequestMessage());
         return true;
     }
