@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:barcode="clr-namespace:Syncfusion.Maui.Barcode;assembly=Syncfusion.Maui.Barcode"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI"
              x:Class="WaiterApp.MainPage">
 
     <ScrollView>
@@ -9,7 +9,17 @@
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
+            <zxing:CameraBarcodeReaderView
+                WidthRequest="300"
+                HeightRequest="300"
+                x:Name="barcodeReader"
+                IsDetecting="True" 
+                IsTorchOn="False" 
+                BarcodesDetected="CameraBarcodeReaderView_BarcodesDetected"/>
 
+            <Label
+                x:Name="barcodeResult"
+                Text=""/>
             <Image
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
@@ -28,13 +38,7 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
-            <barcode:SfBarcodeGenerator Value="https://www.syncfusion.com/"
-                            HeightRequest="250"
-                            WidthRequest="250">
-                <barcode:SfBarcodeGenerator.Symbology>
-                    <barcode:QRCode />
-                </barcode:SfBarcodeGenerator.Symbology>
-            </barcode:SfBarcodeGenerator>
+            
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"

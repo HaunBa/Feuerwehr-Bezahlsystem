@@ -20,5 +20,13 @@
 
 			SemanticScreenReader.Announce(CounterBtn.Text);
 		}
+
+		private void CameraBarcodeReaderView_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+		{
+			Dispatcher.Dispatch(() =>
+			{
+				barcodeResult.Text = $"{e.Results.First().Value} {e.Results.First().Format}";
+            });
+		}
 	}
 }
