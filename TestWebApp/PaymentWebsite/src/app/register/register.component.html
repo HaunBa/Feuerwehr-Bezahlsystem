@@ -1,0 +1,38 @@
+<form class="example-form">
+  <mat-form-field appearance="fill">
+    <!-- Email -->
+    <mat-label>Email Adresse eingeben</mat-label>
+    <input matInput placeholder="z.B.: max@mustermann.at" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <!-- Username-->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Benutzername</mat-label>
+    <input matInput placeholder="z.B.: Maxi" required>
+    <mat-error *ngIf="username.invalid">{{getUsernameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <!-- First Name -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Vorname</mat-label>
+    <input matInput placeholder="z.B.: Maximilian" required>
+    <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <!-- Nachname -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nachname</mat-label>
+    <input matInput placeholder="z.B.: Mustermann" required>
+    <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <!-- Passwort -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Passwort</mat-label>
+  </mat-form-field>
+</form>
