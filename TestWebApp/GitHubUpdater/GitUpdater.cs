@@ -11,19 +11,13 @@ namespace GitHubUpdater
     {
         public Process process = new Process();
 
-        public async Task Start()
+        public void Start()
         {
-            //while (true)
-            //{
-            //    Thread.Sleep(60000);
-            //}
             CheckForUpdate();
-
         }
 
         public void CheckForUpdate()
         {
-
             var remoteVersion = GetRemoteVersion();
             Console.WriteLine("remoteVersion: " + remoteVersion);
 
@@ -33,26 +27,37 @@ namespace GitHubUpdater
 
         private string GetRemoteVersion()
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "git rev-parse origin";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+            var p = new Process();
+            var startInfo = new ProcessStartInfo("cmd.exe")
+            {
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                UseShellExecute = false
+            };
+            p.StartInfo = startInfo;
+            p.Start();
+            StreamReader stdInputReader = p.StandardOutput;
+            StreamWriter stdInputWriter = p.StandardInput;
 
-            var res = process.StandardOutput.ReadToEnd();
+            stdInputWriter.WriteLine("git rev-parse origin");
+            Thread.Sleep(100);
+            var res = stdInputReader.ReadToEnd();
+            //ProcessStartInfo info = new("cmd", "/K git rev-parse origin");            
+            
+            //Process.Start(info);
+
+            //var res = process.StandardOutput.ReadToEnd();
+
             return res;
         }
 
         private string GetLocalVersion()
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "git rev-parse @";
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+            ProcessStartInfo info = new("cmd", "/K git rev-parse @");
+            Process.Start(info);
 
             var res = process.StandardOutput.ReadToEnd();
+
             return res;
         }
     }
