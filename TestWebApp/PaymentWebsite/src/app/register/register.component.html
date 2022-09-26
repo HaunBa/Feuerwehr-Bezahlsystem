@@ -1,38 +1,51 @@
-<form class="example-form">
-  <mat-form-field appearance="fill">
-    <!-- Email -->
-    <mat-label>Email Adresse eingeben</mat-label>
-    <input matInput placeholder="z.B.: max@mustermann.at" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-  </mat-form-field>
+<div class="parent">
+  <form class="example-form">
+    <mat-form-field appearance="fill">
+      <!-- Email -->
+      <mat-label>Email Adresse eingeben</mat-label>
+      <input matInput placeholder="z.B.: max@mustermann.at" formControlName="email" required>
+      <mat-error *ngIf="registerForm.controls['email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <!-- Username-->
 
-  <!-- Username-->
+    <mat-form-field appearance="fill">
+      <mat-label>Benutzername</mat-label>
+      <input matInput placeholder="z.B.: Maxi" required>
+      <mat-error *ngIf="registerForm.controls['username'].invalid">{{getUsernameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <!-- First Name -->
 
-  <mat-form-field appearance="fill">
-    <mat-label>Benutzername</mat-label>
-    <input matInput placeholder="z.B.: Maxi" required>
-    <mat-error *ngIf="username.invalid">{{getUsernameErrorMessage()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Vorname</mat-label>
+      <input matInput placeholder="z.B.: Maximilian" required>
+      <mat-error *ngIf="registerForm.controls['firstName'].invalid">{{getFirstNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <!-- Nachname -->
 
-  <!-- First Name -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nachname</mat-label>
+      <input matInput placeholder="z.B.: Mustermann" required>
+      <mat-error *ngIf="registerForm.controls['lastName'].invalid">{{getLastNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+  <br>
+    <!-- Passwort -->
 
-  <mat-form-field appearance="fill">
-    <mat-label>Vorname</mat-label>
-    <input matInput placeholder="z.B.: Maximilian" required>
-    <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
-  </mat-form-field>
-
-  <!-- Nachname -->
-
-  <mat-form-field appearance="fill">
-    <mat-label>Nachname</mat-label>
-    <input matInput placeholder="z.B.: Mustermann" required>
-    <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
-  </mat-form-field>
-
-  <!-- Passwort -->
-
-  <mat-form-field appearance="fill">
-    <mat-label>Passwort</mat-label>
-  </mat-form-field>
-</form>
+    <mat-form-field appearance="fill">
+      <mat-label>Passwort</mat-label>
+      <input matInput placeholder="Password" required>
+      <mat-error *ngIf="registerForm.controls['password'].invalid">{{getPasswordErrorMessage()}}</mat-error>
+    </mat-form-field>
+  <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Passwort wiederholen</mat-label>
+      <input matInput placeholder="Password" required>
+      <mat-error *ngIf="registerForm.controls['password'].invalid">{{getPasswordErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" class="styledButton">Register</button>
+    <button mat-flat-button color="warn" class="styledButton">Login</button>
+  </form>
+</div>
