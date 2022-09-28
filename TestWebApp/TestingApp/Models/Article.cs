@@ -1,4 +1,4 @@
-﻿using static TestingApp.Extensions;
+﻿using static TestingApp.Enums;
 
 namespace TestingApp.Models
 {

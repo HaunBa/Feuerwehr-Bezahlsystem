@@ -1,5 +1,7 @@
-using Bezahlwebsite.Data;
-using Bezahlwebsite.Models;
+using DataAccess.Data;
+using DataAccess.Interfaces;
+using DataAccess.Models;
+using DataAccess.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -17,13 +19,21 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<IBoughtArticleService, BoughtArticleService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<ITopUpService, TopUpService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
@@ -31,6 +41,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
 }
 else
 {

@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using static TestingApp.Extensions;
+using static TestingApp.Enums;
 
 namespace TestingApp.Areas.Identity.Pages.Account
 {

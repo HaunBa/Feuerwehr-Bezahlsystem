@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using static TestingApp.Extensions;
+using static TestingApp.Enums;
 
 namespace TestingApp.Data
 {

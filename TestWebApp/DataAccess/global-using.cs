@@ -1,0 +1,15 @@
+﻿global using DataAccess.Models;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using static DataAccess.Extensions.Enums;
+global using DataAccess.Interfaces;
+global using DataAccess.Data;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+global using Duende.IdentityServer.EntityFramework.Options;
+global using Microsoft.Extensions.Options;

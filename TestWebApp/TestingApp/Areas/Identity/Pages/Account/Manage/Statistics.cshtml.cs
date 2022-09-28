@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TestingApp.Data;
 using TestingApp.ViewModels;
-using static TestingApp.Extensions;
+using static TestingApp.Enums;
 
 namespace TestingApp.Areas.Identity.Pages.Account.Manage
 {
