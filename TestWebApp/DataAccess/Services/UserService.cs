@@ -3,10 +3,12 @@
     public class UserService : IUserService
     {
         public readonly ApplicationDbContext _db;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserService(ApplicationDbContext db)
+        public UserService(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            this.userManager = userManager;
         }
 
         public State DeleteUser(string id)
