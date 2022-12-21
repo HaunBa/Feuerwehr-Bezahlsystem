@@ -62,12 +62,12 @@ GPIO.setup(root.PinSlot5, GPIO.OUT)
 GPIO.setup(root.PinSlot6, GPIO.OUT)
 
 
-# GPIO.setup(root.InputSlot1, GPIO.IN)
-# GPIO.setup(root.InputSlot2, GPIO.IN)
-# GPIO.setup(root.InputSlot3, GPIO.IN)
-# GPIO.setup(root.InputSlot4, GPIO.IN)
-# GPIO.setup(root.InputSlot5, GPIO.IN)
-# GPIO.setup(root.InputSlot6, GPIO.IN)
+GPIO.setup(root.InputSlot1, GPIO.IN)
+GPIO.setup(root.InputSlot3, GPIO.IN)
+GPIO.setup(root.InputSlot4, GPIO.IN)
+GPIO.setup(root.InputSlot5, GPIO.IN)
+GPIO.setup(root.InputSlot6, GPIO.IN)
+GPIO.setup(root.InputSlot2, GPIO.IN)
 
 def _on_connect():
     hub_connection.send("RegisterVendingmachine", [root.VendingMachineNumber])
