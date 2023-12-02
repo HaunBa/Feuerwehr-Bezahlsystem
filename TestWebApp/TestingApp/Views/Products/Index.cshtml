@@ -23,7 +23,7 @@
     <hr>
         @if (!vending.Any())
         {
-            <h3>@_loc["Nothing Left"]</h3>
+            @* <h3>@_loc["Nothing Left"]</h3> *@
         }else{
                 <div class="container">
                     @for (int i = 0; i < vending.Count; i += 3)
@@ -127,10 +127,10 @@
                                     <h5 class="card-title">@food[x].Name</h5>
                                         <p class="card-text">
                                             <div>
-                                                <strong>@_loc["Price"]</strong> @drinks[x].PriceAmount €
+                                                <strong>@_loc["Price"]</strong> @food[x].PriceAmount €
                                             </div>
                                             <div>
-                                                <strong>@_loc["Amount Left"]</strong> @drinks[x].Amount
+                                                <strong>@_loc["Amount Left"]</strong> @food[x].Amount
                                             </div>
                                         </p>
                                   </div>
@@ -224,13 +224,72 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><a class="btn btn-primary" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a></td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="showModal()">
+                                    Bezahlen
+                                </button>
+
+                            </td>
                         </tr>
-                    }
-                    
+                    }                    
                 </table>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="details-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Restgeldrechner</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="hideModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button class="btn btn-primary" onclick="setMoney(5)" type="button">5€</button>
+                <button class="btn btn-primary" onclick="setMoney(10)" type="button">10€</button>
+                <button class="btn btn-primary" onclick="setMoney(20)" type="button">20€</button>
+                <button class="btn btn-primary" onclick="setMoney(30)" type="button">30€</button>
+                <button class="btn btn-primary" onclick="setMoney(40)" type="button">40€</button>
+                <button class="btn btn-primary" onclick="setMoney(50)" type="button">50€</button>
+                <button class="btn btn-primary" onclick="setMoney(60)" type="button">60€</button>
+                <button class="btn btn-primary" onclick="setMoney(70)" type="button">70€</button>
+                <button class="btn btn-primary" onclick="setMoney(80)" type="button">80€</button>
+                <button class="btn btn-primary" onclick="setMoney(90)" type="button">90€</button>
+                <button class="btn btn-primary" onclick="setMoney(100)" type="button">100€</button>
+                <br />
+                <div style="text-align: center;">
+                    <label class="mt-5"> Zu gebendes Restgeld: </label>
+                    <label id="money">@ViewBag.total €</label>
+                </div>
+                <div>
+                    <a class="btn btn-primary mt-5" asp-controller="Products" asp-action="Purchase">@_loc["Buy"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showModal() {
+        $('#details-modal').modal('show');
+    }
+
+    function hideModal() {
+        $('#details-modal').modal('hide');
+    }
+
+    function setMoney(amount) {
+        var total = parseFloat(@ViewBag.total.ToString().Replace(",", "."));
+        console.log(total);
+        document.getElementById("money").innerText = (amount - total) + " €";
+    }
+
+
+    function getMoney() {
+        return parseFloat(@ViewBag.total);
+    }
+
+</script>

@@ -44,7 +44,7 @@ namespace TestingApp.Controllers
             var cart = SessionHelper.GetObjectFromJson<List<ArticleWithPriceVM>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             if (cart == null) ViewBag.total = 0;
-            else ViewBag.total = cart.Sum(item => item.PriceAmount * item.Amount);
+            else ViewBag.total = cart.Sum(item => item.PriceAmount * item.Amount).ToString("0.00");
 
             return View(articles);
         }
